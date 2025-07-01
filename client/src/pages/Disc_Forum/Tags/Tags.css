@@ -1,0 +1,58 @@
+.tags-page {
+  padding: 40px 20px;
+  max-width: 1100px;
+ margin: 20px auto 0 auto;
+}
+
+.tags-title {
+  font-size: 2rem;
+  color: #19376d;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.tag-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.tag-card {
+  padding: 12px 18px;
+  background-color: #e6f0ff;
+  color: #0b2447;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  white-space: nowrap;
+  flex-shrink: 0;
+   width: fit-content;
+  /* min-width: 140px; */
+  max-width: 200px;
+  flex-basis: 18%; /* Default: 5 per row */
+}
+
+/* Make every group of 3 items after every 5 items wider (creates alternating pattern) */
+.tag-card:nth-child(8n+6),
+.tag-card:nth-child(8n+7),
+.tag-card:nth-child(8n+8) {
+  min-width: 180px;
+  flex-basis: 28%; /* 3 per row */
+}
+
+.tag-card:hover {
+  background-color: #cce0ff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.tag-card:hover {
+  background-color: #cce0ff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

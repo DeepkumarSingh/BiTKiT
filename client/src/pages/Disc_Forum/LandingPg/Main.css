@@ -1,0 +1,238 @@
+--- Container & Layout ---
+.main {
+  display: flex;
+  padding: 30px 0;
+  flex: 1;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* --- Top Section --- */
+.main-top {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.main-top > h2 {
+  font-weight: 600;
+  font-size: 2rem;
+  color: #0a4a89;
+  margin: 0;
+}
+
+.main-top > a > button,
+.main-top > button {
+  margin-left: auto;
+}
+
+/* --- Buttons --- */
+.ask-question-button {
+   display: inline-block;
+   margin-top: 15px;
+  padding: 15px 35px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  white-space: normal;
+  text-align: center;
+  width: 180px;
+  line-height: 1.4;
+  transition: all 0.2s ease;
+}
+
+.ask-question-button:hover {
+    background: linear-gradient(135deg, #0056b3, #003d80);
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+/* --- Description & Filters --- */
+.main-desc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #555;
+  padding: 0 20px 15px;
+  margin-top: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  box-sizing: border-box;
+}
+
+.main-desc-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.main-desc-item > p {
+  margin-left: 15px;
+  font-weight: 500;
+}
+
+/* --- Filter Controls Redesigned --- */
+.main-filter {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Pill‑style tabs container */
+.main-tabs {
+  display: flex;
+  background-color: #f5f5f5;
+  border-radius: 50px;
+  padding: 4px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual tab pills */
+.main-tab {
+  padding: 8px 16px;
+  margin: 0 2px;
+  font-size: 0.9rem;
+  color: #555;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: transparent;
+}
+
+.main-tab:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+  color: #007bff;
+}
+
+.main-tab.active {
+  background-color: #007bff;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+}
+
+/* “Filter” button styling */
+.main-filter-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background-color: #e9f2ff;
+  color: #0056b3;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.main-filter-item:hover {
+  background-color: #d0e4ff;
+  color: #004099;
+  box-shadow: 0 2px 6px rgba(0, 84, 179, 0.2);
+}
+
+/* --- Question List --- */
+.questions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.question-item {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0;
+  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+}
+
+/* --- Responsive Breakpoints --- */
+@media screen and (min-width: 768px) {
+  .main {
+    flex: 0.6;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 20px 0;
+  }
+
+  .main-top,
+  .main-desc,
+  .questions {
+    padding: 0 15px;
+  }
+
+  .main-top > h2 {
+    font-size: 1.5rem;
+  }
+
+  .main-desc {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .main-desc-item {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .main-filter {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .main-tabs {
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .main-tab {
+    flex-grow: 1;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-top > h2 {
+    font-size: 1.2rem;
+  }
+
+  button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+
+  .main-desc,
+  .questions {
+    padding: 0 10px;
+  }
+
+  .main-tab,
+  .main-filter-item {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+}
