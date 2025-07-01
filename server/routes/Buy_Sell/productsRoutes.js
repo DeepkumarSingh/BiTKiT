@@ -4,7 +4,7 @@ const Product = require("../../models/Buy_Sell/productModel");
 const cloudinary = require("../../config/cloudinaryConfig");
 const multer = require("multer");
 const User = require("../../models/Buy_Sell/userModel");
-const Notification = require("../../models/Buy_Sell/notificationModel");
+// const Notification = require("../../models/Buy_Sell/notificationModel");
 const Bid = require("../../models/Buy_Sell/bidModel");
 const { sendEmail } = require("../../utils/sendEmail");
 
@@ -21,15 +21,15 @@ router.post("/add-product", async (req, res) => {
     console.log("All admins",admins);
 
     admins.forEach(async (admin) => {
-      // App notification
-      const newNotification = new Notification({
-        user: admin._id,
-        message: `New product added${req.user?.name ? " by " + req.user.name : ""}.`,
-        title: "New product",
-        onClick: "/admin",
-        read: false,
-      });
-      await newNotification.save();
+      // // App notification
+      // const newNotification = new Notification({
+      //   user: admin._id,
+      //   message: `New product added${req.user?.name ? " by " + req.user.name : ""}.`,
+      //   title: "New product",
+      //   onClick: "/admin",
+      //   read: false,
+      // });
+      // await newNotification.save();
 
       // Email notification
       if (admin.email) {
@@ -203,14 +203,14 @@ router.put("/update-product-status/:id", async (req, res) => {
     }
 
     // App notification to seller
-    const newNotification = new Notification({
-      user: updatedProduct.seller._id,
-      message: `Your product ${updatedProduct.name} has been ${status}.`,
-      title: "Product status updated",
-      onClick: "/profile",
-      read: false,
-    });
-    await newNotification.save();
+    // const newNotification = new Notification({
+    //   user: updatedProduct.seller._id,
+    //   message: `Your product ${updatedProduct.name} has been ${status}.`,
+    //   title: "Product status updated",
+    //   onClick: "/profile",
+    //   read: false,
+    // });
+    // await newNotification.save();
 
     // Send email to seller
     await sendEmail({

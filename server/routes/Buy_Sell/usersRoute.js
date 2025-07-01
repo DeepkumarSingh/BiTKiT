@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const authMiddleware = require("../../middlewares/authMiddleware");
 const { sendEmail } = require("../../utils/sendEmail");
-const Notification = require("../../models/Buy_Sell/notificationModel");
+// const Notification = require("../../models/Buy_Sell/notificationModel");
 
 const router = express.Router();
 
