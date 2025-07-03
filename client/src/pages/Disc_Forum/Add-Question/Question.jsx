@@ -1,121 +1,122 @@
-import React, { useEffect, useState } from "react";
-// import { useSelector } from "react-redux";
+import React, { useState } from "react";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; // ES6
-import "./Question.css";
-// import Editor from "react-quill/lib/toolbar";
+import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import { TagsInput } from "react-tag-input-component";
-// import { selectUser } from "../../feature/userSlice";
 import { useNavigate } from "react-router-dom";
-// import ChipsArray from "./TagsInput";
 
 function Question() {
-
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tag, setTag] = useState([]);
   const navigate = useNavigate();
 
-  const handleQuill = (value) => {
-    setBody(value);
-  };
+  const handleQuill = (value) => setBody(value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const user = localStorage.getItem("Users")
+      ? JSON.parse(localStorage.getItem("Users"))._id
+      : null;
 
     if (title !== "" && body !== "") {
       const bodyJSON = {
-        title: title,
-        body: body,
+        title,
+        body,
         tags: tag,
-       user:localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user"))._id : null,
+        user,
       };
-      await axios
-        .post("/api/v1/forum/questions", bodyJSON)
-        .then((res) => {
-          console.log("tags being sent:",tag);
-          alert("Question added successfully");
-          navigate("/");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+
+      try {
+        await axios.post("/api/v1/forum/questions", bodyJSON);
+        alert("Question added successfully");
+        navigate("/disc_forum_homepage");
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
+
   return (
-    <div className="add-question">
-      <div className="add-question-container">
-        <div className="head-title">
-          <h1>Ask a public question</h1>
+    <div className="flex justify-center w-full min-h-screen p-5 bg-gray-100 text-gray-800 dark:bg-[#0f172a] dark:text-gray-100">
+      <div className="w-full max-w-4xl p-6 flex flex-col gap-6 bg-white dark:bg-[#1e293b] rounded-lg shadow-md">
+        <div>
+          <h1 className="text-3xl font-semibold text-gray-800 dark:text-white">
+            Ask a public question
+          </h1>
         </div>
-        <div className="question-container">
-          <div className="question-options">
-            <div className="question-option">
-              <div className="title">
-                <h3>Title</h3>
-                <small>
-                  Be specific and imagine you’re asking a question to another
-                  person
-                </small>
-                <input
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  type="text"
-                  placeholder="e.g Is there an R function for finding teh index of an element in a vector?"
-                />
-              </div>
-            </div>
-            <div className="question-option">
-              <div className="title">
-                <h3>Body</h3>
-                <small>
-                  Include all the information someone would need to answer your
-                  question
-                </small>
-                <ReactQuill
-                  value={body}
-                  onChange={handleQuill}
-                //   modules={Editor.modules}
-                  className="react-quill"
-                  theme="snow"
-                />
-              </div>
-            </div>
-            <div className="question-option">
-              <div className="title">
-                <h3>Tags</h3>
-                <small>
-                  Add up to 5 tags to describe what your question is about
-                </small>
-                {/* <input
-                  value={tag}
-                  onChange={(e) => setTag(e.target.value)}
-                  data-role="tagsinput"
-                  data-tag-trigger="Space"
-                  type="text"
-                  placeholder="e.g. (asp.net-mvc php react json)"
-                /> */}
 
-                <TagsInput
-                  value={tag}
-                  onChange={(newTags) => {
-                    const normalizedTags = newTags.map(tag => tag.trim().toLowerCase());
-                    setTag(normalizedTags);
-                  }}
-                  name="tags"
-                  placeHolder="press enter to add new tag"
-                />
+        <div className="flex flex-col gap-6">
+          {/* Title */}
+          <div className="flex flex-col gap-2">
+            <h3 className="text-lg font-medium">Title</h3>
+            <small className="text-gray-500 dark:text-gray-400">
+              Be specific and imagine you’re asking a question to another person
+            </small>
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              type="text"
+              placeholder="e.g. How to find the index of an element in a vector in R?"
+              className="p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
 
-                {/* <ChipsArray /> */}
-              </div>
+          {/* Body */}
+          <div className="flex flex-col gap-2">
+            <h3 className="text-lg font-medium">Body</h3>
+            <small className="text-gray-500 dark:text-gray-400">
+              Include all the information someone would need to answer your question
+            </small>
+            <ReactQuill
+              value={body}
+              onChange={handleQuill}
+              className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-md border border-gray-300 dark:border-gray-600"
+              theme="snow"
+              style={{
+                minHeight: "200px",
+                backgroundColor: "inherit",
+                color: "inherit",
+              }}
+            />
+          </div>
+
+          {/* Tags */}
+          <div className="mt-4">
+            <div className="flex flex-col gap-2">
+              <h3 className="text-lg font-medium">Tags</h3>
+              <small className="text-gray-500 dark:text-gray-400">
+                Add up to 5 tags to describe what your question is about
+              </small>
+              <TagsInput
+                value={tag}
+                onChange={(newTags) => {
+                  const normalizedTags = newTags.map((tag) =>
+                    tag.trim().toLowerCase()
+                  );
+                  setTag(normalizedTags);
+                }}
+                name="tags"
+                placeHolder="Press enter to add new tag"
+                classNames={{
+                  input:
+                    "p-2 border border-gray-300 dark:border-gray-600 rounded-md w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100",
+                  tag: "bg-blue-100 text-blue-800 px-2 py-1 rounded mr-1 dark:bg-blue-800 dark:text-white",
+                }}
+              />
             </div>
           </div>
         </div>
 
-        <button onClick={handleSubmit} className="button">
-          Add your question
-        </button>
+        {/* Submit Button */}
+        <div className="flex justify-end">
+          <button
+            onClick={handleSubmit}
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium shadow-md hover:bg-blue-700 transition duration-200"
+          >
+            Add your question
+          </button>
+        </div>
       </div>
     </div>
   );

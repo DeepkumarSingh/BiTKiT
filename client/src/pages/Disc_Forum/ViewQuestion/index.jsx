@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from '../LandingPg/Sidebar';
 import MainQn from './MainQn';
-import '../LandingPg/index.css';
+// import '../LandingPg/index.css';
 // import './index.css';
 
 function index() {

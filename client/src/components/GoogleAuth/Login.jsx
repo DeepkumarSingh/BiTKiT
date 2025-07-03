@@ -1,31 +1,32 @@
+import React from "react";
 import { auth, provider } from "../../firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/usersSlice"; // Import your action to set user
 
-const allowedDomain = "bitmesra.ac.in";
+import { useAuth } from "../../context/AuthProvide";
+// ...
 
 const Login = () => {
+  const [authUser, setAuthUser] = useAuth();
   const navigate = useNavigate();
-    const dispatch = useDispatch();
 
-  const handleLogin = async () => {
+  const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       const email = user.email;
       const domain = email.split("@")[1];
 
-      if (domain !== allowedDomain) {
+      if (domain !== "bitmesra.ac.in") {
         alert("❌ Access denied. Use your BIT Mesra email.");
         await signOut(auth);
         return;
       }
 
-      // ✅ Get ID token
-      const token = await user.getIdToken();//its a jwt token
+      const token = await user.getIdToken();
 
-      // 🔒 Send token to your backend for secure validation
       const response = await fetch("/api/v1/forum/login", {
         method: "POST",
         headers: {
@@ -36,52 +37,70 @@ const Login = () => {
       });
 
       const data = await response.json();
-      if (response.ok) {
-        localStorage.setItem("user", JSON.stringify(data)); // Save user._id etc.
+console.log("Login response data:", data);
 
-        dispatch(setUser(data)); // <-- This is important!
-        
-         navigate("/"); // Redirect to homepage
+      if (response.ok) {
+        console.log("forumUser to be stored:", data.forumUser);
+        localStorage.setItem("Users", JSON.stringify(data.forumUser));
+        console.log("forumUser ID:", JSON.parse(localStorage.getItem("Users"))._id);
+        localStorage.setItem("BuySellUser", JSON.stringify(data.buySellUser));
+        setAuthUser(data.forumUser); // ✅ context update
+        document.getElementById("my_modal_5").close();
         alert(`✅ Welcome, ${user.displayName}`);
-       
-        
+        navigate("/");
       } else {
         alert("❌ Server rejected access");
         await signOut(auth);
       }
-
     } catch (error) {
       console.error("Login error:", error);
-      if (error.code === 'auth/popup-closed-by-user') {
-        alert("❌ Authentication canceled. Please try again.");
-      } else {
-        alert("❌ Something went wrong.");
-      }
+      alert("❌ Something went wrong.");
     }
-
-    
   };
 
   return (
-<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#04152d] via-[#19376d] to-[#576cbc] text-white px-4 sm:px-6 lg:px-8 animate-[gradientShift_15s_ease_infinite] bg-[length:200%_200%]">
-  <div className="bg-[#0b2447]/30 backdrop-blur-xl border border-white/10 flex flex-col justify-center items-center rounded-2xl shadow-2xl p-8 sm:p-10 w-full max-w-[20rem] min-h-[24rem] text-center transform transition-all duration-500 hover:scale-105">
-    <h1 className="text-3xl sm:text-4xl font-extrabold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-[#a3bffa]">
-      BIT Mesra Portal
-    </h1>
-    <p className="text-sm sm:text-base text-gray-200 mb-10 mt-7 leading-relaxed">
-      Only students with a <span className="text-[#a3bffa] font-semibold">BIT Mesra</span> email can log in.
-    </p>
-    <button
-      onClick={handleLogin}
-      className="relative overflow-hidden bg-[#576cbc] hover:bg-[#4356a4] text-white font-semibold px-6 py-3 mt-4 rounded-xl transition duration-300 shadow-lg h-[3rem] w-full max-w-[12rem] transform hover:-translate-y-1 before:content-[''] before:absolute before:top-0 before:left-[-100%] before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:transition-all before:duration-500 hover:before:left-[100%]"
-    >
-      Sign in with Google
-    </button>
-  </div>
-</div>
+    <div className="dark:bg-slate-900 dark:text-black">
+      <dialog
+        id="my_modal_5"
+        className="modal modal-bottom sm:modal-middle md:ml-2"
+      >
+        <div className="modal-box">
+          <button
+            type="button"
+            onClick={() => document.getElementById("my_modal_5").close()}
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
+            ✕
+          </button>
 
+          <h3 className="font-bold text-2xl text-center">
+            Welcome to <span className="text-pink-500">BiTKiT</span>
+          </h3>
+          <h5 className="py-2 text-center">
+            Sign in with your BIT Mesra Google Account{" "}
+            <i className="fa-solid fa-circle-info fa-xl"></i>
+          </h5>
 
+          <div className="flex flex-col items-center mt-6">
+            <button
+              onClick={handleGoogleLogin}
+              className="bg-pink-500 text-white rounded-md px-6 py-2 hover:bg-pink-700 duration-200 shadow-md"
+            >
+              <i className="fa-brands fa-google mr-2"></i> Sign in with Google
+            </button>
+
+            <p className="text-sm text-gray-600 mt-4 text-center">
+              Only{" "}
+              <span className="font-semibold text-blue-600">
+                bitmesra.ac.in
+              </span>{" "}
+              emails are allowed.
+            </p>
+          </div>
+        </div>
+      </dialog>
+    </div>
   );
-}
+};
 
 export default Login;

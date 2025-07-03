@@ -48,6 +48,7 @@ const commentRoute = require('./routes/Disc_Forum/Comment');
 const voteRoute = require('./routes/Disc_Forum/vote');
 const authRoutes = require('./routes/Disc_Forum/authRoutes');
 const tagsRoute = require('./routes/Disc_Forum/tags');
+const deleteQnRoute = require('./routes/Disc_Forum/DeleteQn'); // Importing DeleteQn route
 
 
 const developerRoute = require('./routes/Academics/developerRoute');
@@ -81,6 +82,7 @@ app.use('/api/v1/forum', commentRoute);
 app.use('/api/v1/forum', voteRoute);
 app.use('/api/v1/forum', authRoutes);
 app.use('/api/v1/forum', tagsRoute);
+app.use('/api/v1/forum', deleteQnRoute); // Importing DeleteQn route
 
 // Academics Routes
 app.use('/api/v1/academics', developerRoute);

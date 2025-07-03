@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AllQuestions from "./AllQuestions";
+import ConnectWithoutContactTwoToneIcon from '@mui/icons-material/ConnectWithoutContactTwoTone';
 
 function Main({ questions }) {
   const [filter, setFilter] = useState("Newest");
@@ -32,55 +33,58 @@ function Main({ questions }) {
   }, [questions, filter]);
 
   return (
-    <div className="flex flex-col flex-1 py-8 box-border  dark:bg-gray-900 text-black dark:text-white ">
-      <div className="flex flex-col w-full">
-        <div className="flex items-center justify-between w-full mb-5 px-5 box-border">
-          <h2 className="font-semibold text-2xl md:text-3xl text-[#0a4a89] m-0">
-            Join the discussion, share your thoughts💭💭
-          </h2>
-          <Link to="/add-question">
-            <button className="mt-4 px-7 py-4 bg-blue-500 text-white text-lg font-medium rounded-lg shadow-md hover:bg-gradient-to-r hover:from-blue-800 hover:to-blue-900 hover:shadow-lg transition-all duration-200">
-              Ask Question
+    <div className="flex flex-col flex-1 py-10 px-4 sm:px-8 dark:bg-gray-900 text-black dark:text-white transition-colors duration-300">
+      
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 text-blue-700 dark:text-blue-300">
+          <ConnectWithoutContactTwoToneIcon className="text-inherit" />
+          Join the discussion, share your thoughts
+        </h2>
+        <Link to="/add-question">
+          <button className="mt-4 sm:mt-0 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-md shadow hover:shadow-lg transition-all">
+            Ask Question
+          </button>
+        </Link>
+      </div>
+
+      {/* Filter Tabs */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-300 dark:border-gray-700 pb-4 mb-4 gap-3">
+        <p className="text-lg font-semibold text-gray-700 dark:text-gray-200 ml-1">
+          {filteredQuestions.length} {filteredQuestions.length === 1 ? "Question" : "Questions"}
+        </p>
+        <div className="flex flex-wrap gap-2 bg-gray-100 dark:bg-gray-800 p-2 rounded-full shadow-inner">
+          {["Newest", "Most Viewed", "Most Voted", "Unanswered"].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setFilter(tab)}
+              className={`px-4 py-1.5 text-sm rounded-full transition-all duration-300 focus:outline-none
+              ${
+                filter === tab
+                  ? "bg-blue-600 text-white shadow"
+                  : "text-gray-700 dark:text-gray-300 hover:bg-blue-200 dark:hover:bg-gray-700"
+              }`}
+            >
+              {tab}
             </button>
-          </Link>
+          ))}
         </div>
+      </div>
 
-        <div className="flex items-center justify-between text-sm text-gray-600 px-5 pb-4 mt-2 border-b border-gray-300 box-border">
-          <div className="flex items-center justify-between flex-wrap flex-1">
-            <p className="ml-4 font-medium">{filteredQuestions.length} Questions</p>
-            <div className="flex items-center flex-wrap gap-3">
-              <div className="flex bg-gray-100 rounded-full p-1 shadow-inner">
-                {["Newest", "Most Viewed", "Most Voted", "Unanswered"].map((tab) => (
-                  <div
-                    key={tab}
-                    className={`px-4 py-2 text-sm rounded-full cursor-pointer transition-all duration-300 ${
-                      filter === tab
-                        ? "bg-blue-500 text-white shadow-md"
-                        : "bg-transparent text-gray-600 hover:bg-blue-100 hover:text-blue-500"
-                    }`}
-                    onClick={() => setFilter(tab)}
-                  >
-                    {tab}
-                  </div>
-                ))}
-              </div>
-              {/* <div className="flex items-center gap-1 px-3 py-2 rounded-md bg-blue-100 text-blue-800 text-sm font-medium cursor-pointer hover:bg-blue-200 hover:text-blue-900 shadow-sm transition-all duration-300">
-                Filter
-              </div> */}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col w-full px-5 box-border">
-          {filteredQuestions.map((q, index) => (
+      {/* Questions List */}
+      <div className="space-y-6">
+        {filteredQuestions.length > 0 ? (
+          filteredQuestions.map((q, index) => (
             <div
               key={q._id || index}
-              className="flex flex-col py-4 border-b border-gray-300 w-full"
+              className="border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-shadow"
             >
               <AllQuestions question={q} />
             </div>
-          ))}
-        </div>
+          ))
+        ) : (
+          <p className="text-center text-gray-600 dark:text-gray-400 mt-6">No questions found.</p>
+        )}
       </div>
     </div>
   );

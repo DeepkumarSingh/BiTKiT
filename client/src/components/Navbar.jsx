@@ -1,57 +1,28 @@
 import React, { useEffect, useState } from "react";
-import Login from "../pages/userDetails/Login";
-import Logout from "../pages/userDetails/Logout";
+import Login from "../components/GoogleAuth/Login";
+import Logout from "../components/GoogleAuth/Logout";
 import { useAuth } from "../context/AuthProvide";
-import { useSelector } from "react-redux";
-import { Avatar, Badge, message } from "antd";
-import Notifications from "./Notifications";
-import { useNavigate } from "react-router-dom";
-import {
-  GetAllNotifications,
-  ReadAllNotifications,
-} from "../apicalls/notifications";
+import { Avatar } from "@mui/material";
+import { Link, useLocation } from "react-router-dom";
 
 function Navbar() {
   const [authUser, setAuthUser] = useAuth();
-  const { user } = useSelector((state) => state.users);
-  const [notifications, setNotifications] = useState([]);
-  const [showNotifications, setShowNotifications] = useState(false);
-  const navigate = useNavigate();
-
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
+  const location = useLocation();
+  const pathname = location.pathname;
+
+  const [sticky, setSticky] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      setSticky(window.scrollY > 0);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const element = document.documentElement;
-
-  const getNotifications = async () => {
-    try {
-      const response = await GetAllNotifications();
-      if (response.success) {
-        setNotifications(response.data);
-      } else {
-        throw new Error(response.message);
-      }
-    } catch (error) {
-      message.error(error.message);
-    }
-  };
-
-  const readNotifications = async () => {
-    try {
-      const response = await ReadAllNotifications();
-      if (response.success) {
-        getNotifications();
-      } else {
-        throw new Error(response.message);
-      }
-    } catch (error) {
-      message.error(error.message);
-    }
-  };
-
- 
-
   useEffect(() => {
     if (theme === "dark") {
       element.classList.add("dark");
@@ -64,93 +35,86 @@ function Navbar() {
     }
   }, [theme]);
 
-  useEffect(() => {
-    console.log("User from Redux navbar:", user);
-  }, [user]);
+  const navLinkClasses = (path) =>
+    `relative py-2 px-2 after:absolute after:left-0 after:-bottom-1 after:w-full after:h-0.5 
+     after:bg-pink-500 after:scale-x-0 after:origin-left after:transition-transform after:duration-300 
+     hover:after:scale-x-100 ${
+       pathname === path
+         ? "after:scale-x-100 font-semibold text-pink-600 dark:text-pink-400"
+         : ""
+     }`;
 
-  const [sticky, setSticky] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setSticky(true);
-      } else {
-        setSticky(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
   const navItems = (
     <>
-      <li className="md:px-2 dark:hover:bg-slate-800 duration-300 rounded-md">
-        <a href="/">Home</a>
+      <li>
+        <Link to="/" className={navLinkClasses("/")}>
+          Home
+        </Link>
       </li>
-      <li className="md:px-2 dark:hover:bg-slate-800 duration-300 rounded-md">
-        <a href="/course">Academics</a>
+      <li>
+        <Link to="/course" className={navLinkClasses("/course")}>
+          Academics
+        </Link>
       </li>
-      <li className="md:px-2 dark:hover:bg-slate-800 duration-300 rounded-md">
-        <a href="/buy-sell-home">Buy & Sell</a>
+      <li>
+        <Link to="/buy-sell-home" className={navLinkClasses("/buy-sell-home")}>
+          Buy & Sell
+        </Link>
       </li>
-      <li className="md:px-2 dark:hover:bg-slate-800 duration-300 rounded-md">
-        <a href="/disc_forum_homepage">Discussion Forum</a>
+      <li>
+        <Link to="/disc_forum_homepage" className={navLinkClasses("/disc_forum_homepage")}>
+          Discussion Forum
+        </Link>
       </li>
-      <li className="md:px-2 dark:hover:bg-slate-800 duration-300 rounded-md">
-        <a href="/clubs">Clubs & Communities</a>
+      <li>
+        <Link to="/clubs" className={navLinkClasses("/clubs")}>
+          Clubs & Communities
+        </Link>
       </li>
-      <li className="md:px-2 dark:hover:bg-slate-800 duration-300 rounded-md dropdown dropdown-hover">
+      <li className="dropdown dropdown-hover">
         <details className="dropdown">
-          <summary className="cursor-pointer">Others</summary>
+          <summary className="cursor-pointer py-2 px-2">Others</summary>
           <ul className="p-2 bg-white dark:bg-slate-800 shadow rounded-md z-50 w-40">
             <li>
-              <a
-                href="/sport"
-                className="block px-2 py-1 hover:bg-gray-200 dark:hover:bg-slate-700 rounded"
-              >
+              <Link to="/sport" className={navLinkClasses("/sport")}>
                 Sports
-              </a>
+              </Link>
             </li>
             <li>
               <a
                 href="https://www.bitotsav.com"
-                target="blank"
+                target="_blank"
+                rel="noreferrer"
                 className="block px-2 py-1 hover:bg-gray-200 dark:hover:bg-slate-700 rounded"
               >
                 Bitotsav
               </a>
             </li>
             <li>
-              <a
-                href="/map"
-                className="block px-2 py-1 hover:bg-gray-200 dark:hover:bg-slate-700 rounded"
-              >
+              <Link to="/map" className={navLinkClasses("/map")}>
                 Map
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/downloads"
-                className="block px-2 py-1 hover:bg-gray-200 dark:hover:bg-slate-700 rounded"
-              >
+              <Link to="/downloads" className={navLinkClasses("/downloads")}>
                 Downloads
-              </a>
+              </Link>
             </li>
           </ul>
         </details>
       </li>
     </>
   );
+
   return (
     <div
       className={`w-full sticky top-0 z-50 bg-white bg-opacity-95 dark:bg-slate-900 dark:text-white ${
         sticky
-          ? "sticky-navbar shadow-md bg-base-200 dark:bg-slate-800 dark:text-white duration-300 transition-all ease-in-out"
+          ? "shadow-md dark:bg-slate-800 transition-all duration-300 ease-in-out"
           : ""
       }`}
     >
-      <div className="max-w-screen-2xl container mx-auto md:px-5 sticky top-0 z-50">
+      <div className="max-w-screen-2xl container mx-auto md:px-5">
         <div className="navbar">
           <div className="navbar-start">
             <div className="dropdown">
@@ -188,12 +152,14 @@ function Navbar() {
               BiTKiT
             </a>
           </div>
+
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1 ">{navItems}</ul>
+            <ul className="menu menu-horizontal px-1 gap-3">{navItems}</ul>
           </div>
+
           <div className="navbar-end space-x-3">
-            
-            <label className="swap swap-rotate">
+            {/* Theme Switcher */}
+       <label className="swap swap-rotate">
               {/* this hidden checkbox controls the state */}
               <input
                 type="checkbox"
@@ -222,17 +188,32 @@ function Navbar() {
               </svg>
             </label>
 
+
+
+            {/* Auth Buttons */}
             {authUser ? (
-              <Logout />
+              <div className="flex items-center gap-2">
+                <Logout />
+                <div className="user-menu flex items-center gap-2 ml-4">
+                  <Avatar
+                    alt={authUser?.displayName}
+                    src={authUser?.photoURL || ""}
+                    className="w-10 h-10"
+                  />
+                  <span className="hidden md:inline text-lg font-medium text-gray-700 dark:text-white">
+                    {authUser?.displayName?.split(" ")[0]}
+                  </span>
+                </div>
+              </div>
             ) : (
-              <div className="">
+              <div>
                 <a
-                  className="bg-pink-500 text-white px-2 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer"
+                  className="bg-pink-500 text-white px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer"
                   onClick={() =>
                     document.getElementById("my_modal_5").showModal()
                   }
                 >
-                  Login{" "}
+                  Login
                 </a>
                 <Login />
               </div>
@@ -240,14 +221,6 @@ function Navbar() {
           </div>
         </div>
       </div>
-      {
-        <Notifications
-          notifications={notifications}
-          relaodNotifications={getNotifications}
-          showNotifications={showNotifications}
-          setShowNotifications={setShowNotifications}
-        />
-      }
     </div>
   );
 }

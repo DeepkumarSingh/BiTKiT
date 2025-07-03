@@ -64,15 +64,9 @@ import { logEvent } from "firebase/analytics";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Loader from "./components/Loader.jsx";
 
-function App() {
-  //   const dispatch = useDispatch();
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem("user");
-  //   if (storedUser) {
-  //     dispatch(setUser(JSON.parse(storedUser)));
-  //   }
-  // }, []);
+function App() {
   useEffect(() => {
     if (analytics) {
       logEvent(analytics, "page_view", {
@@ -93,74 +87,66 @@ function App() {
     }
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   const auth = getAuth();
-  //   const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-  //     if (firebaseUser) {
-  //       // You can customize the user object as needed
-  //       dispatch(setUser({
-  //         uid: firebaseUser.uid,
-  //         email: firebaseUser.email,
-  //         displayName: firebaseUser.displayName,
-  //         photoURL: firebaseUser.photoURL,
-  //         // ...any other fields you need
-  //       }));
-  //     } else {
-  //       dispatch(setUser(null));
-  //     }
-  //   });
-  //   return () => unsubscribe();
-  // }, [dispatch]);
-
   return (
     <div className="App min-h-screen flex flex-col">
       <Loader />
       {location.pathname !== "/login" && <Navbar />}
       <div className="flex-grow">
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/add-question" element={<Question />} />
-          <Route path="/view-question" element={<ViewQuestion />} />
-          <Route path="/disc_forum_homepage" element={<LandingPg />} />
-          <Route path="/tags" element={<Tags />} />
-          <Route path="/tags/:tag" element={<ViewQnByTags />} />
 
+
+          {/* Protected Routes */}
+
+          <Route element={<ProtectedRoute />}>
+
+            {/* Academic Routes */}
+            <Route path="/course" element={<Courses />} />
+            <Route path="/clubs" element={<Clubs_Comm />} />
+            <Route path="/course/cse" element={<CSE />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/faqs" element={<FAQS />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/sport" element={<Sports />} />
+            <Route path="/err" element={<Error />} />
+            <Route path="/downloads" element={<Download />} />
+            <Route path="/course/cse/cse_sem1" element={<CseSem1 />} />
+            <Route path="/course/cse/cse_sem2" element={<CseSem2 />} />
+            <Route path="/course/cse/cse_sem3" element={<CseSem3 />} />
+            <Route path="/course/cse/cse_sem4" element={<CseSem4 />} />
+            <Route path="/course/cse/cse_sem5" element={<CseSem5 />} />
+            <Route path="/course/cse/cse_sem6" element={<CseSem6 />} />
+            <Route path="/course/aiml" element={<AIML />} />
+            <Route path="/course/ece" element={<ECE />} />
+            <Route path="/course/eee" element={<EEE />} />
+            <Route path="/course/me" element={<ME />} />
+            <Route path="/course/mech/mech_sem1" element={<MechSem1 />} />
+            <Route path="/course/mech/mech_sem2" element={<MechSem2 />} />
+            <Route path="/course/chem" element={<CHEMICAL />} />
+            <Route path="/course/civil" element={<CIVIL />} />
+            <Route path="/course/biotech" element={<BIOTECH />} />
+            <Route path="/course/prod" element={<PRODUCTION />} />
+            <Route path="/course/food" element={<FOOD />} />
+
+            {/* Buy-Sell Routes */}
+
+            <Route path="/buy-sell-home" element={<BuySellHome />} />
+            <Route path="/product/:id" element={<ProductInfo />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/admin" element={<Admin />} />
+
+            {/* Discussion Forum Routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/add-question" element={<Question />} />
+            <Route path="/view-question" element={<ViewQuestion />} />
+            <Route path="/disc_forum_homepage" element={<LandingPg />} />
+            <Route path="/tags" element={<Tags />} />
+            <Route path="/tags/:tag" element={<ViewQnByTags />} />
+
+          </Route>
+
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
-          {/* <Route path="/course" element={authUser ? <Courses /> : <Navigate to="/signup" />} /> */}
-          <Route path="/course" element={<Courses />} />
-          <Route path="/clubs" element={<Clubs_Comm />} />
-          {/* <Route path="/signup" element={<Signup />} /> */}
-          <Route path="/course/cse" element={<CSE />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/faqs" element={<FAQS />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/sport" element={<Sports />} />
-          <Route path="/err" element={<Error />} />
-          <Route path="/downloads" element={<Download />} />
-          {/* <Route path="/clubs" element={<Clubs_Comm/>} /> */}
-
-          <Route path="/course/cse/cse_sem1" element={<CseSem1 />} />
-          <Route path="/course/cse/cse_sem2" element={<CseSem2 />} />
-          <Route path="/course/cse/cse_sem3" element={<CseSem3 />} />
-          <Route path="/course/cse/cse_sem4" element={<CseSem4 />} />
-          <Route path="/course/cse/cse_sem5" element={<CseSem5 />} />
-          <Route path="/course/cse/cse_sem6" element={<CseSem6 />} />
-          <Route path="/course/aiml" element={<AIML />} />
-          <Route path="/course/ece" element={<ECE />} />
-          <Route path="/course/eee" element={<EEE />} />
-          <Route path="/course/me" element={<ME />} />
-          <Route path="/course/mech/mech_sem1" element={<MechSem1 />} />
-          <Route path="/course/mech/mech_sem2" element={<MechSem2 />} />
-          <Route path="/course/chem" element={<CHEMICAL />} />
-          <Route path="/course/civil" element={<CIVIL />} />
-          <Route path="/course/biotech" element={<BIOTECH />} />
-          <Route path="/course/prod" element={<PRODUCTION />} />
-          <Route path="/course/food" element={<FOOD />} />
-
-          <Route path="/buy-sell-home" element={<BuySellHome />} />
-          <Route path="/product/:id" element={<ProductInfo />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/admin" element={<Admin />} />
+          
         </Routes>
       </div>
 

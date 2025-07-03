@@ -2,7 +2,7 @@ import React, { use } from 'react';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import Main from './Main';
-import './index.css';
+
 import { useEffect,useState } from 'react';
 
 function Index() {

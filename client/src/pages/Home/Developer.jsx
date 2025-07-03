@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import Cards from './Cards';
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import Login from '../userDetails/Login';
+
 const Developer = () => {
     const [developer, setDeveloper] = useState([])
     useEffect(() => {
@@ -75,7 +75,7 @@ const Developer = () => {
                         Join Now
                     </a>
                     <br></br>
-                    <span className="mt-4 text-sm text-white/80">
+                    {/* <span className="mt-4 text-sm text-white/80">
                         Already a member?{" "}
                         <a
                             className="underline cursor-pointer hover:text-white"
@@ -84,7 +84,7 @@ const Developer = () => {
                             Login
                         </a>
                         <Login />
-                    </span>
+                    </span> */}
                 </div>
 
 

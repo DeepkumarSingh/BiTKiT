@@ -19,6 +19,7 @@ router.post('/questions', async (req, res) => {
       message: 'Question created successfully',
       status: true,
       data: doc,
+      
     });
   } catch (err) {
     res.status(500).send({
@@ -91,14 +92,17 @@ router.get("/questions/:id", async (req, res) => {
                 created_at: 1,
                 votes: 1,
                 votedBy: 1,
-                "userDetails.displayName": 1,
-                "userDetails.photoURL": 1,
+                userDetails: {
+    displayName: "$userDetails.displayName",
+    photoURL: "$userDetails.photoURL"
+  }
               },
             },
           ],
           as: "answerDetails",
         },
       },
+      
 
       // 👇 Join comments (optional user info)
       {
@@ -161,6 +165,9 @@ router.get("/questions/:id", async (req, res) => {
         },
       },
     ]);
+    // console.log("Question Details:", questionDetails);
+    console.log("Comments:", questionDetails[0]?.comments);
+    console.log("User Details:", questionDetails[0]?.userDetails);
 
     // Final formatting (if needed)
     if (questionDetails.length > 0) {
@@ -253,7 +260,7 @@ router.get("/questions", async (req, res) => {
     {
       $project: {
         __v: 0,
-        "userDetails._id": 0,
+        // "userDetails._id": 0,
         "userDetails.firebaseUid": 0,
         "userDetails.email": 0,
         "userDetails.updatedAt": 0,
@@ -264,15 +271,19 @@ router.get("/questions", async (req, res) => {
   ])
     .exec()
     .then((questionDetails) => {
-      res.status(200).send(
-        questionDetails.map((q) => ({
-          ...q,
-          user: {
-            displayName: q.userDetails?.displayName || "Unknown",
-            photoURL: q.userDetails?.photoURL || null,
-          },
-        }))
-      );
+     res.status(200).send(
+  questionDetails.map((q) => {
+    // console.log("🔍 userDetails for question:", q.userDetails);
+    return {
+      ...q,
+      user: {
+        displayName: q.userDetails?.displayName || "Unknown",
+        photoURL: q.userDetails?.photoURL || null,
+        userId: q.userDetails?._id?.toString() || null,
+      },
+    };
+  })
+);
     })
     .catch((e) => {
       console.log("Error: ", e);
