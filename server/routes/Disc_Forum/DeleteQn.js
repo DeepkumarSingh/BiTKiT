@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const QuestionDB = require("../../models/Disc_Forum/Question");
+const { auth } = require("firebase-admin");
+const authMiddleware = require("../../middlewares/authMiddleware");
 
-router.delete("/questions/:id", async (req, res) => {
+router.delete("/questions/:id",authMiddleware, async (req, res) => {
   const { id } = req.params;
   const { userId } = req.body;
 

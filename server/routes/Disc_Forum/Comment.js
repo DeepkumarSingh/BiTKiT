@@ -2,8 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const commentDB = require('../../models/Disc_Forum/Comment');
+const authMiddleware = require('../../middlewares/authMiddleware');
 
-router.post('/comments/:id', async (req, res) => {
+router.post('/comments/:id',authMiddleware, async (req, res) => {
   try {
     const { comment, user } = req.body;
     const questionId = req.params.id;

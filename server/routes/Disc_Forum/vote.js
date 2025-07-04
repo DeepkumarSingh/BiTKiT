@@ -1,12 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
+const authMiddleware = require("../../middlewares/authMiddleware");
 
 const Question = require("../../models/Disc_Forum/Question");
 const Answer = require("../../models/Disc_Forum/Answer");
 
 // --- Vote on Question ---
-router.post("/questions/:id/vote", async (req, res) => {
+router.post("/questions/:id/vote",authMiddleware, async (req, res) => {
   const { voteType, userId } = req.body;
 
   if (!userId) {
@@ -41,7 +42,7 @@ router.post("/questions/:id/vote", async (req, res) => {
 });
 
 // --- Vote on Answer ---
-router.post("/answers/:id/vote", async (req, res) => {
+router.post("/answers/:id/vote", authMiddleware, async (req, res) => {
   const { voteType, userId } = req.body;
 
   if (!userId) {

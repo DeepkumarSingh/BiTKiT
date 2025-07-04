@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 const QuestionDB = require('../../models/Disc_Forum/Question');
+const authMiddleware = require('../../middlewares/authMiddleware');
 
-router.post('/questions', async (req, res) => {
+router.post('/questions', authMiddleware, async (req, res) => {
   try {
     const questionData = new QuestionDB({
       title: req.body.title,
