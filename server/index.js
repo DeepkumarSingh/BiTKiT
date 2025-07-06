@@ -1,46 +1,6 @@
-// // const express = require("express"); // old method style
-// // const dotenv = require("dotenv");  // old method style
-// import express from "express";
-// import dotenv from "dotenv";
-// import mongoose from "mongoose";
-// import cors from "cors";
-// import uploadRoute from "./Routes/upload.js";
-
-// import developerRoute from "./routes/developer.route.js";
-// import userRoute from "./routes/user.route.js";
-
-// const app = express();
-// app.use(cors());
-// app.use(express.json()); // to parse into json format
-// dotenv.config();
-
-// // const uploadRoute = require('./Routes/upload.js');
-// app.use('/api', uploadRoute);
-
-// const PORT = process.env.PORT || 4000;//if the port present in .env file is not available then it run on port 4000
-// const URI =process.env.MONGODBURI;
-
-// try{
-//     mongoose.connect(URI,
-//         {
-//             useNewUrlParser:true, // require for running in local device 
-//             useUnifiedTopology: true // these 2 will not required in mongo atlas
-//         });
-//         console.log("Connected to mongodb");
-// } catch(error){
-//         console.log("Error",error);
-// }
-// // All Routes
-// app.use("/developer",developerRoute);
-// app.use("/user",userRoute);
-
-// app.listen(PORT, ()=>{
-//     console.log(`listening to port no ${PORT}`);
-// });
 
 const express = require('express');
 
-// Import routes using CommonJS syntax
 const indexRoute = require('./routes/Disc_Forum/index');
 const questionRoute = require('./routes/Disc_Forum/Question');
 const answerRoute = require('./routes/Disc_Forum/Answer');
@@ -58,6 +18,10 @@ const usersRoute = require("./routes/Buy_Sell/usersRoute");
 const productsRoute = require("./routes/Buy_Sell/productsRoutes");
 const bidsRoute = require("./routes/Buy_Sell/bidsRoute");
 const notificationsRoute = require("./routes/Buy_Sell/notificationsRoute");
+const deleteAnswerRoute = require('./routes/Disc_Forum/DeleteAns'); // Importing DeleteAns route
+const deleteCommentRoute = require('./routes/Disc_Forum/DeleteComments'); // Importing Delete\
+const blockUserRoute = require('./routes/blockUser'); // Importing blockUser route
+const unBlockUserRoute = require('./routes/unBlockUser'); // Importing unBlockUser
 
 // Import database connections
 const { forumConn, academicsConn } = require('./config/connectDB');
@@ -83,6 +47,10 @@ app.use('/api/v1/forum', voteRoute);
 app.use('/api/v1/forum', authRoutes);
 app.use('/api/v1/forum', tagsRoute);
 app.use('/api/v1/forum', deleteQnRoute); // Importing DeleteQn route
+app.use('/api/v1/forum', deleteAnswerRoute); // Importing DeleteAns route
+app.use('/api/v1/forum', deleteCommentRoute); // Importing DeleteComments route
+app.use('/api/v1', blockUserRoute); // Importing blockUser route
+app.use('/api/v1', unBlockUserRoute); // Importing unBlockUser
 
 // Academics Routes
 app.use('/api/v1/academics', developerRoute);

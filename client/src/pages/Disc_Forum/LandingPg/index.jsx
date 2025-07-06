@@ -65,13 +65,13 @@ function Index() {
   }, []);
 
   return (
-    <div className="stack-index dark:bg-slate-800 dark:text-white">
-      <div className="stack-index-content">
-        <Sidebar className="sidebar dark:bg-slate-800 dark:text-white" />
-        <Main className="main dark:bg-slate-800 dark:text-white" questions={questions} />
-      </div>
+  <div className="stack-index dark:bg-slate-800 dark:text-white min-h-screen">
+    <div className="stack-index-content flex flex-col md:flex-row w-full">
+      <Sidebar className="sidebar dark:bg-slate-800 dark:text-white w-full md:w-[240px] flex-shrink-0" />
+      <Main className="main dark:bg-slate-800 dark:text-white flex-1" questions={questions} />
     </div>
-  );
+  </div>
+);
 }
 
 export default Index;

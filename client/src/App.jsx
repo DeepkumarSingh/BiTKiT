@@ -166,6 +166,7 @@ import ViewQuestion from "./pages/Disc_Forum/ViewQuestion";
 import Question from "./pages/Disc_Forum/Add-Question/Question";
 import Tags from "./pages/Disc_Forum/Tags";
 import ViewQnByTags from "./pages/Disc_Forum/ViewQnByTags";
+import BlockUnblockUser from "./components/BlockUnblockUser.jsx";
 
 import Home from "./pages/Home/Home.jsx";
 import Courses from "./pages/academics/courses/Courses.jsx";
@@ -213,6 +214,7 @@ import { setForumUser, setBuySellUser } from "./redux/usersSlice";
 
 import { analytics } from "./firebase";
 import { logEvent } from "firebase/analytics";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -293,6 +295,8 @@ function App() {
             <Route path="/disc_forum_homepage" element={<LandingPg />} />
             <Route path="/tags" element={<Tags />} />
             <Route path="/tags/:tag" element={<ViewQnByTags />} />
+            <Route path="/block-user" element={<BlockUnblockUser/>} />
+            <Route path="/unblock-user" element={<BlockUnblockUser/>} />
           </Route>
 
           {/* Login Page */}

@@ -269,6 +269,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Tooltip from "@mui/material/Tooltip";
 import { Avatar } from "@mui/material";
 import ReactQuill from "react-quill";
@@ -276,10 +277,9 @@ import ReactHtmlParser from "html-react-parser";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "react-quill/dist/quill.snow.css";
-import { message } from "antd";
+import { message, Modal } from "antd";
 import { useSelector } from "react-redux";
-import  axiosInstance  from "../../../utils/axiosInstance";
-
+import axiosInstance from "../../../utils/axiosInstance";
 
 dayjs.extend(relativeTime);
 
@@ -305,10 +305,9 @@ function MainQn() {
 
   useEffect(() => {
     getQuestionDetails();
-
     if (!hasIncrementedView.current) {
-      fetch(`/api/v1/forum/questions/${id}/view`, { method: "PUT" }).catch(
-        (err) => console.error("Error updating views", err)
+      fetch(`/api/v1/forum/questions/${id}/view`, { method: "PUT" }).catch((err) =>
+        console.error("Error updating views", err)
       );
       hasIncrementedView.current = true;
     }
@@ -326,9 +325,7 @@ function MainQn() {
     };
 
     try {
-      await axiosInstance.post("/forum/answers", body, {
-        headers: { "Content-Type": "application/json" },
-      });
+      await axiosInstance.post("/forum/answers", body);
       message.success("Answer added successfully!");
       setAnswer("");
       getQuestionDetails();
@@ -360,9 +357,7 @@ function MainQn() {
   };
 
   const handleVote = async (type, targetId, isAnswer = false) => {
-    if (!forumUser?._id) {
-      return message.error("Please log in to vote");
-    }
+    if (!forumUser?._id) return message.error("Please log in to vote");
 
     const endpoint = isAnswer
       ? `/forum/answers/${targetId}/vote`
@@ -380,17 +375,57 @@ function MainQn() {
     }
   };
 
+  const handleDeleteComment = (commentId) => {
+    Modal.confirm({
+      title: "Delete Comment",
+      content: "Are you sure you want to delete this comment?",
+      okText: "Yes",
+      cancelText: "No",
+      okType: "danger",
+      onOk: async () => {
+        try {
+          await axiosInstance.delete(`/forum/comments/${commentId}`, {
+            data: { userId: forumUser?._id }
+          });
+          message.success("Comment deleted");
+          getQuestionDetails();
+        } catch (err) {
+          console.error("Delete comment failed:", err);
+          message.error("Failed to delete comment");
+        }
+      },
+    });
+  };
+
+  const handleDeleteAnswer = (answerId) => {
+    Modal.confirm({
+      title: "Delete Answer",
+      content: "Are you sure you want to delete this answer?",
+      okText: "Yes",
+      cancelText: "No",
+      okType: "danger",
+      onOk: async () => {
+        try {
+          await axiosInstance.delete(`/forum/answers/${answerId}`, {
+            data: { userId: forumUser?._id }
+          });
+          message.success("Answer deleted");
+          getQuestionDetails();
+        } catch (err) {
+          console.error("Delete answer failed:", err);
+          message.error("Failed to delete answer");
+        }
+      },
+    });
+  };
+
   const getLastActivityTime = () => {
     if (!questionData) return "Unknown";
     const timestamps = [];
 
     if (questionData.createdAt) timestamps.push(new Date(questionData.createdAt));
-    questionData.answerDetails?.forEach((a) => {
-      if (a.createdAt) timestamps.push(new Date(a.createdAt));
-    });
-    questionData.comments?.forEach((c) => {
-      if (c.createdAt) timestamps.push(new Date(c.createdAt));
-    });
+    questionData.answerDetails?.forEach((a) => a.createdAt && timestamps.push(new Date(a.createdAt)));
+    questionData.comments?.forEach((c) => c.createdAt && timestamps.push(new Date(c.createdAt)));
 
     const lastActivity = new Date(Math.max(...timestamps.map((t) => t.getTime())));
     return dayjs(lastActivity).fromNow();
@@ -453,10 +488,24 @@ function MainQn() {
       <div className="mb-6">
         {questionData?.comments?.map((c) => (
           <div key={c._id} className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-md mb-2 text-sm break-words">
-            <div className="flex items-center gap-1 flex-wrap">
-              <span className="mr-1">{c.comment}</span>
-              <span className="bg-blue-100 dark:bg-blue-800 text-blue-600 dark:text-blue-200 font-medium px-1.5 py-0.5 rounded">- {c.userDetails?.displayName || "Anonymous"}</span>
-              <small>{new Date(c.created_at).toLocaleString()}</small>
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <div>
+                <span className="mr-1">{c.comment}</span>
+                <span className="bg-blue-100 dark:bg-blue-800 text-blue-600 dark:text-blue-200 font-medium px-1.5 py-0.5 rounded">
+                  - {c.userDetails?.displayName || "Anonymous"}
+                </span>
+                <small className="ml-2">
+                  {new Date(c.created_at).toLocaleString()}
+                  {forumUser?._id === c.user && (
+                    <Tooltip title="Delete comment" arrow>
+                      <DeleteOutlineIcon
+                        className="text-red-500 cursor-pointer ml-2 text-sm"
+                        onClick={() => handleDeleteComment(c._id)}
+                      />
+                    </Tooltip>
+                  )}
+                </small>
+              </div>
             </div>
           </div>
         ))}
@@ -508,6 +557,14 @@ function MainQn() {
                 <div className="flex items-center gap-2 mt-1">
                   <Avatar src={a.userDetails?.photoURL} />
                   <p>{a.userDetails?.displayName || "Unknown"}</p>
+                  {forumUser?._id === a.user && (
+                    <Tooltip title="Delete answer" arrow>
+                      <DeleteOutlineIcon
+                        className="text-red-500 cursor-pointer text-sm"
+                        onClick={() => handleDeleteAnswer(a._id)}
+                      />
+                    </Tooltip>
+                  )}
                 </div>
               </div>
             </div>

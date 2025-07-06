@@ -16,12 +16,12 @@ router.delete("/questions/:id",authMiddleware, async (req, res) => {
       return res.status(404).json({ message: "Question not found" });
     }
 
-    // console.log("User ID from request body:", userId);
-    // console.log("Question user ID:", question.user);
+    console.log("User ID from request body:", userId);
+    console.log("Question user ID:", question.user);
     // // Optional: Check if the logged-in user owns the question
-    // if (String(question.user) !== String(userId)) {
-    //   return res.status(403).json({ message: "Unauthorized: Cannot delete this question" });
-    // }
+    if (String(question.user) !== String(userId)) {
+      return res.status(403).json({ message: "Unauthorized: Cannot delete this question" });
+    }
 
     await QuestionDB.findByIdAndDelete(id);
 
