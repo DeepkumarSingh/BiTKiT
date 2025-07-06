@@ -6,3 +6,15 @@
 body{ 
     font-family: "Montserrat", sans-serif;
 }
+
+.ant-modal-body {
+  scrollbar-width: thin;
+}
+
+.ant-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+.ant-modal-body::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 6px;
+}

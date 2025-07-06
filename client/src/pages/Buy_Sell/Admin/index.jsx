@@ -66,11 +66,11 @@ function Admin() {
 
   return (
     <div className="m-3">
-      <Tabs>
-        <Tabs.TabPane tab="Products" key="1">
+      <Tabs className="custom-tabs dark:text-white">
+        <Tabs.TabPane tab={<span className="dark:text-white">Products</span>} key="1">
           <Products />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Users" key="2">
+        <Tabs.TabPane tab={<span className="dark:text-white">Users</span>} key="2">
           <Users />
         </Tabs.TabPane>
       </Tabs>

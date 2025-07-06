@@ -270,8 +270,8 @@ function ProductInfo() {
             <Divider />
 
             <div>
-              <h1 className="font-semibold text-gray-600">Added On</h1>
-              <span className="text-gray-600">
+              <h1 className="font-semibold text-gray-500">Added On</h1>
+              <span className="text-gray-500">
                 {moment(product.createdAt).format("MMM D YYYY, HH:mm A")}
               </span>
             </div>
@@ -364,15 +364,15 @@ function ProductInfo() {
                     key={index}
                     className="border border-gray-300 border-solid p-3 rounded mt-4 text-sm sm:text-base"
                   >
-                    <div className="flex justify-between text-gray-700">
+                    <div className="flex justify-between text-gray-500">
                       <span>Name</span>
                       <span>{bid.buyer?.name}</span>
                     </div>
-                    <div className="flex justify-between text-gray-600">
+                    <div className="flex justify-between text-gray-500">
                       <span>Bid Amount</span>
                       <span>₹ {bid.bidAmount}</span>
                     </div>
-                    <div className="flex justify-between text-gray-600">
+                    <div className="flex justify-between text-gray-500">
                       <span>Bid Placed On</span>
                       <span>
                         {moment(bid.createdAt).format("MMM D YYYY, HH:mm A")}

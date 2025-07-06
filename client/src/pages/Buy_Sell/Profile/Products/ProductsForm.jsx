@@ -210,6 +210,8 @@ import TextArea from "antd/es/input/TextArea";
 import { setLoader } from "../../../../redux/loadersSlice";
 import { AddProduct, EditProduct } from "../../../../apicalls/products";
 import Images from "./Images";
+import { CloseOutlined } from "@ant-design/icons";
+
 
 const additionalThings = [
   { label: "Bill Available", name: "billAvailable" },
@@ -275,6 +277,18 @@ function ProductsForm({
       okText="Save"
       onOk={() => formRef.current.submit()}
       {...(selectedTab === "2" && { footer: false })}
+      closeIcon={
+        <CloseOutlined
+          style={{
+            fontSize: "20px",
+            color: "#ff4d4f", // red color
+            fontWeight: "bold",
+            backgroundColor: "#fff1f0",
+            borderRadius: "50%",
+            padding: "4px",
+          }}
+        />
+      }
       styles={{
         body: {
           maxHeight: "75vh",

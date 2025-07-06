@@ -127,7 +127,7 @@ function Bids() {
     {
       title: "Bid Placed On",
       dataIndex: "createdAt",
-      width: 180,
+      width: 150,
       render: (text) => moment(text).format("DD-MM-YYYY hh:mm a"),
     },
     {
@@ -138,12 +138,12 @@ function Bids() {
     {
       title: "Message",
       dataIndex: "message",
-      width: 200,
+      width: 250,
     },
     {
       title: "Contact Details",
       dataIndex: "contactDetails",
-      width: 250,
+      width: 200,
       render: (text, record) => (
         <div>
           <p>Phone: {record?.mobile || "N/A"}</p>

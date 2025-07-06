@@ -287,9 +287,9 @@ function Products() {
       dataIndex: "action",
       width: 180,
       render: (text, record) => (
-        <div className="flex gap-3 items-center">
+        <div className="flex gap-5 items-center">
           <span
-            className="underline cursor-pointer"
+            className="underline cursor-pointer text-blue-500"
             onClick={() => {
               setSelectedProduct(record);
               setShowBids(true);
@@ -298,14 +298,14 @@ function Products() {
             Show Bids
           </span>
           <i
-            className="ri-pencil-line cursor-pointer"
+            className="ri-pencil-line cursor-pointer text-xl"
             onClick={() => {
               setSelectedProduct(record);
               setShowProductForm(true);
             }}
           ></i>
           <i
-            className="ri-delete-bin-line text-red-600 cursor-pointer"
+            className="ri-delete-bin-line text-red-600 cursor-pointer text-xl"
             onClick={() => deleteProduct(record._id)}
           ></i>
         </div>
