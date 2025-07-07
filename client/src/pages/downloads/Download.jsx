@@ -19,7 +19,7 @@ const resources = [
         title: "Hostel Rules and Regulations",
         description: "Important guidelines and rules for students staying in hostels.",
         tag: "Hostel Info",
-        link: "/err",
+        link: "https://drive.google.com/file/d/14W9ETujHBVV8kMDQYmUCx_TS1YBGR-1f/view?usp=sharing",
     },
     {
         title: "B.Tech. in Computer Science and Engineering",
@@ -33,7 +33,18 @@ const resources = [
         tag: "Course & Syllabus",
         link: "https://bitmesra.ac.in/Courses/admincse/DeptFiles/NEPa2111ecdeb574b709785e287fecb8be9_BTECH-AI-ML-NEP%20CourseStructure%202024-25.pdf",
     },
-    
+    {
+        title: "BIT Mesra Bus Timetable",
+        description: "Official bus timetable for BIT Mesra (Students/Staffs/Teachers) , including routes and timings for various locations.",
+        tag: "Bus Timetable",
+        link: "https://drive.google.com/file/d/1Tk5YfFfe_Cn3BKLVtoigJSaX3KFvTO0t/view?usp=sharing",
+    },
+    {
+        title: "C.G.P.A to Percentage Conversion Formula",
+        description: "Formula to convert C.G.P.A to Percentage for Students of BIT Mesra.",
+        tag: "Academic Info",
+        link: "https://drive.google.com/file/d/1_ZS3o3AhLCgLxwBv80XWdJocFFmCqprY/view?usp=sharing",
+    },
 ];
 
 function Download() {
@@ -41,14 +52,14 @@ function Download() {
         <div className="flex flex-col min-h-screen">
             {/* <Navbar /> */}
 
-            <main className="flex-grow p-8 bg-slate-800 text-white">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <main className="flex-grow px-4 py-8 sm:px-8 bg-slate-800 text-white">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {resources.map((res, index) => (
                         <div
                             key={index}
-                            className="bg-white text-black rounded-xl shadow-md w-80 overflow-hidden transition hover:shadow-xl"
-                        >
-                            <div className="p-4">
+                            className="bg-white text-black rounded-xl shadow-md w-full sm:w-72 md:w-80 overflow-hidden transition hover:shadow-xl">
+
+                            <div className="p-4 h-full flex flex-col">
                                 <div className="flex items-center gap-3 mb-4">
                                     <img
                                         src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
@@ -61,14 +72,17 @@ function Download() {
                                     </div>
                                 </div>
                                 <p className="text-sm text-gray-700 mb-4">{res.description}</p>
-                                <a
-                                    href={res.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="btn btn-sm btn-primary w-full"
-                                >
-                                    Download PDF
-                                </a>
+
+                                <div className="mt-auto">
+                                    <a
+                                        href={res.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="btn btn-sm btn-primary w-full"
+                                    >
+                                        Download PDF
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     ))}

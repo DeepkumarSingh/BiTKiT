@@ -223,7 +223,7 @@ const clubs = [
     name: "UNESQUO",
     abbreviation: "UNESQUO",
     type: "Self Development",
-    logo: "https://scontent.fpat3-3.fna.fbcdn.net/v/t39.30808-1/306843302_463685125799498_6440379255570587761_n.jpg?stp=c118.0.977.977a_dst-jpg_s480x480_tt6&_nc_cat=106&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=C2Fv13r6WkcQ7kNvwECBewF&_nc_oc=AdnJemYGEJY8lop3Eio59FCmUKYs5gIHk3uRZJiU7Tlg2lFc_JA85NAHKcGW9j8tGnveqy7DlpKz9l7UoOHpi95x&_nc_zt=24&_nc_ht=scontent.fpat3-3.fna&_nc_gid=ljd9ulNBBVvGYQcoeua3GA&oh=00_AfP--bab1x9fzINhw9cpt8oqPP01dqHBC6I4-0KLWX6umQ&oe=685B585D",
+    logo: "https://unesquo.in/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.9d197c8e.png&w=128&q=75",
     links: {
       profile: "https://www.facebook.com/Unesquo/",
       website: "https://unesquo.in/",

@@ -61,7 +61,7 @@ function CseSem1() {
                 </ul>
                 <hr></hr>
                 <div className="mt-2 px-4">
-                  <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{color:"red"}}></i></h2>
+                  <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{ color: "red" }}></i></h2>
                   <ul className="list-none space-y-2 ml-1">
                     <li>
                       <a
@@ -108,11 +108,11 @@ function CseSem1() {
                         rel="noreferrer"
                         className="flex items-center gap-2 text-blue-600 hover:underline"
                       >
-                        <i className="ri-youtube-fill"></i>
+                        <i className="ri-file-download-line"></i>
                         <b>2022 Notes</b>
                       </a>
                     </li>
-                    </ul>
+                  </ul>
 
                 </div>
 
@@ -129,15 +129,15 @@ function CseSem1() {
               Basic Electronics
             </div>
             <div className="collapse-content space-y-2">
-                <h3 className='text-red-500 text-bold'>Tips 1 - <span >Study this subject carefully — many students struggle or get backs in it.</span></h3>
+              <h3 className='text-red-500 text-bold'>Tips 1 - <span >Study this subject carefully — many students struggle or get backs in it.</span></h3>
               <div className="text-left p-4">
                 <ul className="list-disc space-y-4 ml-5 text-justify">
-                  
+
                   <li>
                     <strong>Module-I : Diodes and Applications</strong><br />
                     Introduction to semiconductor materials, PN junction diode, barrier potential, depletion layer width, junction capacitance, diode current equation, I-V plot, diode-resistance, temperature dependence, breakdown mechanisms, Zener diode – operation and applications, Diode as a Rectifier: Half Wave and Full Wave Rectifiers with and without C-Filters.
                   </li>
-            
+
                   <li>
                     <strong>Module-II : Bipolar Junction Transistors (BJT)</strong><br />
                     Basic operation of PNP and NPN Transistors, Input and Output Characteristics of CB, CE and CC Configurations. Transistor biasing: operating point, Fixed bias, emitter bias, voltage divider bias, stability factor, small signal analysis (h-parameter model) of CE configuration.
@@ -161,7 +161,7 @@ function CseSem1() {
                 </ul>
                 <hr></hr>
                 <div className="mt-2 px-4">
-                  <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{color:"red"}}></i></h2>
+                  <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{ color: "red" }}></i></h2>
                   <ul className="list-none space-y-2 ml-1">
                     <li>
                       <a
@@ -193,16 +193,16 @@ function CseSem1() {
                   <ul className="list-none space-y-2 ml-1">
                     <li>
                       <a
-                        href="#"
+                        href="https://www.tutorialspoint.com/basic_electronics/index.htm"
                         target="_blank"
                         rel="noreferrer"
                         className="flex items-center gap-2 text-blue-600 hover:underline"
                       >
-                        <i className="ri-youtube-fill"></i>
-                        <b>Notes</b>
+                        <i className="ri-file-download-line"></i>
+                        <b>Tutorial Point</b>
                       </a>
                     </li>
-                    </ul>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -220,9 +220,9 @@ function CseSem1() {
                 <ul className="list-disc space-y-4 ml-5 text-justify">
                   <li>
                     <strong> Module-I : System of Forces and Structure Mechanics</strong><br />
-                      Addition of Forces, Moment of a Force, Couple, Varignon’s theorem, Free Body Diagram, Equilibrium in Two and Three Dimensions, Equivalent Forces and Moment.
-                      Types of Plane Trusses, Analysis of Plane Trusses by: Method of Joints and Method of Sections.
-                      Hooke’s Law of elasticity, Stress and Strain, Relation between elastic constants.
+                    Addition of Forces, Moment of a Force, Couple, Varignon’s theorem, Free Body Diagram, Equilibrium in Two and Three Dimensions, Equivalent Forces and Moment.
+                    Types of Plane Trusses, Analysis of Plane Trusses by: Method of Joints and Method of Sections.
+                    Hooke’s Law of elasticity, Stress and Strain, Relation between elastic constants.
                   </li>
 
                   <li>
@@ -253,7 +253,7 @@ function CseSem1() {
                 </ul>
                 <hr></hr>
                 <div className="mt-2 px-4">
-                  <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{color:"red"}}></i></h2>
+                  <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{ color: "red" }}></i></h2>
                   <ul className="list-none space-y-2 ml-1">
                     <li>
                       <a
@@ -284,17 +284,10 @@ function CseSem1() {
                   <h2 className="text-lg font-semibold mt-2"> NOTES - <i className="fa-solid fa-file-arrow-down fa-lg"></i></h2>
                   <ul className="list-none space-y-2 ml-1">
                     <li>
-                      <a
-                        href="#"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center gap-2 text-blue-600 hover:underline"
-                      >
-                        <i className="ri-youtube-fill"></i>
-                        <b>2022 Notes</b>
-                      </a>
+                      <i className="ri-file-download-line"></i>
+                      <b className='text-blue-500'> Make Your Own Class Notes</b>
                     </li>
-                    </ul>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -307,12 +300,12 @@ function CseSem1() {
               Environmental Sciences
             </div>
             <div className="collapse-content space-y-2">
-                <h3 className='text-red-500 text-bold'>Tips 1 - <span >Scoring & Easy Subject.</span></h3>
+              <h3 className='text-red-500 text-bold'>Tips 1 - <span >Scoring & Easy Subject.</span></h3>
               <div className="text-left p-4">
                 <ul className="list-disc space-y-4 ml-5 text-justify">
                   <li>
                     <strong>Module-I : Ecosystem and Environment</strong><br />
-                      Concepts of Ecology and Environmental science, ecosystem: structure, function and services, Biogeochemical cycles, energy and nutrient flow, ecosystem management. Concept of Biodiversity.
+                    Concepts of Ecology and Environmental science, ecosystem: structure, function and services, Biogeochemical cycles, energy and nutrient flow, ecosystem management. Concept of Biodiversity.
                   </li>
 
                   <li>
@@ -338,7 +331,7 @@ function CseSem1() {
                 </ul>
                 <hr></hr>
                 <div className="mt-2 px-4">
-                  <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{color:"red"}}></i></h2>
+                  <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{ color: "red" }}></i></h2>
                   <ul className="list-none space-y-2 ml-1">
                     <li>
                       <a
@@ -363,11 +356,11 @@ function CseSem1() {
                         rel="noreferrer"
                         className="flex items-center gap-2 text-blue-600 hover:underline"
                       >
-                        <i className="ri-youtube-fill"></i>
-                        <b>Notes</b>
+                        <i className="ri-file-download-line"></i>
+                        <b>Notes ( 2022 )</b>
                       </a>
                     </li>
-                    </ul>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -385,13 +378,13 @@ function CseSem1() {
                 <ul className="list-disc space-y-4 ml-5 text-justify">
                   <li>
                     <strong>Module-I : Bonding in Coordination Complex</strong><br />
-                      Introduction to Chemical Bonding, Werner's Theory, Bonding in coordination complexes, Crystal Field Theory, Octahedral, Tetrahedral and Square planar complexes, CFSE, Jahn Teller theorem, Spectral, electronic and magnetic properties of coordination complexes.
+                    Introduction to Chemical Bonding, Werner's Theory, Bonding in coordination complexes, Crystal Field Theory, Octahedral, Tetrahedral and Square planar complexes, CFSE, Jahn Teller theorem, Spectral, electronic and magnetic properties of coordination complexes.
                   </li>
 
                   <li>
                     <strong>Module–II : Organic Structure and Reactivity</strong><br />
                     Aromaticity, Geometrical isomerism: cis–trans, E/Z, and syn-anti isomerism; Optical isomerism & Chirality; Wedge, Fischer, Newmann and Sawhorse projection formulae and interconversions; D/L, R/S nomenclature system; Conformational studies of n-butane.
-                    Addition, Elimination, Substitution and Rearrangement reaction.   
+                    Addition, Elimination, Substitution and Rearrangement reaction.
                   </li>
 
                   <li>
@@ -412,7 +405,7 @@ function CseSem1() {
                 <hr></hr>
 
                 <div className="mt-2 px-4">
-                  <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{color:"red"}}></i></h2>
+                  <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{ color: "red" }}></i></h2>
                   <ul className="list-none space-y-2 ml-1">
                     <li>
                       <a
@@ -437,11 +430,11 @@ function CseSem1() {
                         rel="noreferrer"
                         className="flex items-center gap-2 text-blue-600 hover:underline"
                       >
-                        <i className="ri-youtube-fill"></i>
-                        <b>Notes</b>
+                        <i className="ri-file-download-line"></i>
+                        <b>Notes ( 2022 )</b>
                       </a>
                     </li>
-                    </ul>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -452,9 +445,9 @@ function CseSem1() {
             <div className="collapse-title text-xl font-medium">Engineering Graphics</div>
             <div className="collapse-content">
               <div className="text-left p-4">
-                <span className='text-pink-500'>Note:</span> The provided YouTube links and Book are sufficient for this Subject
+                <span className='text-pink-500'>Tips :</span> The provided YouTube links and Book are sufficient for this Subject
                 <div className="mt-2 px-4">
-                  <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{color:"red"}}></i></h2>
+                  <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{ color: "red" }}></i></h2>
                   <ul className="list-none space-y-2 ml-1">
                     <li>
                       <a
@@ -506,7 +499,7 @@ function CseSem1() {
 
                   </ul>
                   <hr></hr>
-                  
+
                   <h2 className="text-lg font-semibold mt-2"> Book - <i className="fa-solid fa-file-arrow-down fa-lg"></i></h2>
                   <ul className="list-none space-y-2 ml-1">
                     <li>
@@ -520,29 +513,29 @@ function CseSem1() {
                         <b>ND Bhatt</b>
                       </a>
                     </li>
-                    </ul>
+                  </ul>
                 </div>
               </div>
 
             </div>
           </div>
-                      <div className="collapse collapse-plus bg-base-200 mt-2">
-                        <input type="radio" name="outer-accordion" />
-                        <div className="collapse-title text-xl font-medium">Previous Year Paper(PYQ's)</div>
-                        <div className="collapse-content">
-                            <div className="text-left p-4">
-                                <span className='text-pink-500'>Note:</span> Check the official site for all previous year papers (click the given below link)
-                                <div className="mt-2 px-4">
-                                    <a
-                                        href="https://archive.bitmesra.ac.in/Visit_Other_Department_9910?cid=1&deptid=258&pid=361"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="flex items-center gap-2 text-red-600 hover:underline"
-                                        >BIT Mesra Archive Official website</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          <div className="collapse collapse-plus bg-base-200 mt-2">
+            <input type="radio" name="outer-accordion" />
+            <div className="collapse-title text-xl font-medium">Previous Year Paper(PYQ's)</div>
+            <div className="collapse-content">
+              <div className="text-left p-4">
+                <span className='text-pink-500'>Note:</span> Check the official site for all previous year papers (click the given below link)
+                <div className="mt-2 px-4">
+                  <a
+                    href="https://www.bitmesra.ac.in/Other-Department-Pages/content/1/258/361"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 text-red-600 hover:underline"
+                  >BIT Mesra Archive Official website</a>
+                </div>
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>

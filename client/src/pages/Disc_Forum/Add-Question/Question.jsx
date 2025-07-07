@@ -188,7 +188,7 @@ function Question() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             type="text"
-            placeholder="e.g. How to find the index of an element in a vector in R?"
+            placeholder="e.g. Write your question or query here. Be respectful - avoid rude or irrelevant comments "
             className="p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
@@ -209,7 +209,7 @@ function Question() {
         </div>
 
         {/* Tags */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 mt-12 md:mt-4">
           <h3 className="text-lg font-medium">Tags</h3>
           <small className="text-gray-500 dark:text-gray-400">
             Add up to 5 tags to describe what your question is about

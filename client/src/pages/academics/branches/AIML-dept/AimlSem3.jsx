@@ -1,8 +1,5 @@
-import React from 'react'
-import Navbar from '../../../../components/Navbar';
-import Footer from '../../../../components/Footer';
-
-function CseSem3() {
+import React from 'react';
+function AimlSem3() {
     return (
         <>
             <div className='min-h-screen text-center md:w-[1000px] mx-auto'>
@@ -217,13 +214,10 @@ function CseSem3() {
 
                                     <h2 className="text-lg font-semibold mt-2"> NOTES - <i className="fa-solid fa-file-arrow-down fa-lg"></i></h2>
                                     <ul className="list-none space-y-2 ml-1">
-                                        <ul className="list-none space-y-2 ml-1">
                                         <li>
-                                            
                                                 <i className="ri-file-download-line"></i>
-                                                <b className='text-blue-500'> coming soon.. </b>
+                                                <b className='text-blue-500'> coming soon..</b>
                                         </li>
-                                    </ul>
                                     </ul>
                                 </div>
                             </div>
@@ -598,4 +592,4 @@ function CseSem3() {
     ) 
 }
 
-export default CseSem3
+export default AimlSem3;

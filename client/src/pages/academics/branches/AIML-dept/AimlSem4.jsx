@@ -1,8 +1,5 @@
-import React from 'react'
-import Navbar from '../../../../components/Navbar';
-import Footer from '../../../../components/Footer';
-
-function CseSem4() {
+import React from 'react';
+function AimlSem4() {
 return (
     <>
             <div className='min-h-screen text-center md:w-[1000px] mx-auto'>
@@ -114,7 +111,7 @@ return (
                                                 className="flex items-center gap-2 text-blue-600 hover:underline"
                                             >
                                                 <i className="ri-file-download-line"></i>
-                                                <b>Apna College</b>
+                                                <b>Apna College(DBMS for Placement)</b>
                                             </a>
                                         </li>
                                     </ul>
@@ -227,219 +224,6 @@ return (
                         </div>
                     </div>
 
-                    {/*Operating System*/}
-                    <div className="collapse collapse-plus bg-base-200 mt-2">
-                        <input type="radio" name="outer-accordion" defaultChecked />
-                        <div className="collapse-title text-xl font-medium">
-                            Operating System
-                        </div>
-                        <div className="collapse-content space-y-2">
-                                <h3 className='text-red-500 text-bold'>Tips 1 - <span>Important Subject for Internships & Placement.</span></h3>
-                            <div className="text-left p-4">
-                                <ul className="list-disc space-y-4 ml-5 text-justify">
-                                    <li>
-                                        <strong> Module-I : Introduction to Operating System </strong><br />
-                                        Introduction, Computer System Organization and Architecture, Operating System 
-                                        Operations, 
-                                        Resource Management, Security and Protection, Virtualization, Distributed System, 
-                                        Operating System Services, User and Operating System Interface
-                                    </li>
-
-                                    <li>
-                                        <strong>Module–II : Process Management</strong><br />
-                                        Process and Threads: Process Concept, Process Scheduling, Operations on 
-                                        Process, Interprocess Communication, Thread 
-                                        Overview, Multicore Programming, Multithreading Models.CPU Scheduling: Basic Concepts, Scheduling criteria, Scheduling Algorithms, 
-                                        Thread Scheduling, Multi-Processor Scheduling, Algorithm Evaluation  
-                                    </li>
-
-                                    <li>
-                                        <strong>Module–III : Process Synchronization and Deadlocks</strong><br />
-                                        Process Synchronization: Background, Critical Section Problem Peterson 
-                                        Solution, Hardware Support 
-                                        for Synchronization, Mutex locks, Semaphore, Monitors, Classical problems of 
-                                        Synchronization 
-                                        Deadlock: Deadlock Characterization, Methods for Handling Deadlock, Deadlock 
-                                        Prevention, Deadlock Avoidance, Deadlock Detection, Recovery from Deadlock  
-                                    </li>
-
-                                    <li>
-                                        <strong>MODULE – IV : Main Memory</strong><br />
-                                        Background, Contiguous Memory Allocation, Paging, Structure of 
-                                        the Page Table, 
-                                        Swapping, Segmentation 
-                                        Virtual Memory : Background, Demand paging, Copy-on-write, Page 
-                                        Replacement, Allocation of Frames, Thrashing
-                                    </li>
-
-                                    <li>
-                                        <strong>MODULE – V : Storage and File Management </strong><br />
-                                        Storage Management : HDD Scheduling, Swap Space Management, RAID 
-                                        Structures 
-                                        File Management : File Concepts, Access Methods, Directory structure, Protection, 
-                                        File- system Implementation, Allocation Methods and Free Space Management.
-                                    </li>
-
-                                </ul>
-                                <hr></hr>
-                                <div className="mt-2 px-4">
-                                    <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{ color: "red" }}></i></h2>
-                                    <ul className="list-none space-y-2 ml-1">
-                                        <li>
-                                            <a
-                                                href="https://youtube.com/playlist?list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p&si=YPRG8fxX1K9-xFx3"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="flex items-center gap-2 text-red-600 hover:underline"
-                                            >
-                                                <i className="ri-youtube-fill"></i>
-                                                <b>Gate Smashers</b>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a
-                                                href="https://youtube.com/playlist?list=PL0s3O6GgLL5csKdIeV-Z7fZXohZUMAAsG&si=sLXQu2pSD0CxoyGg"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="flex items-center gap-2 text-red-600 hover:underline"
-                                            >
-                                                <i className="ri-youtube-fill"></i>
-                                                <b>Last Moment Tuitions</b>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="https://youtube.com/playlist?list=PLmXKhU9FNesSFvj6gASuWmQd23Ul5omtD&si=eMiQ06UB4Hz7RNVE"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="flex items-center gap-2 text-red-600 hover:underline"
-                                            >
-                                                <i className="ri-youtube-fill"></i>
-                                                <b>KnowledgeGATE by Sanchit Sir</b>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <hr></hr>
-
-                                    <h2 className="text-lg font-semibold mt-2"> NOTES - <i className="fa-solid fa-file-arrow-down fa-lg"></i></h2>
-                                    <ul className="list-none space-y-2 ml-1">
-                                        <li>
-                                            <a
-                                                href="https://www.gatevidyalay.com/operating-system/"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="flex items-center gap-2 text-blue-600 hover:underline"
-                                            >
-                                                <i className="ri-file-download-line"></i>
-                                                <b>Gate Vidyalay(Practice)</b>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/*FLAT*/}
-                    <div className="collapse collapse-plus bg-base-200 mt-2">
-                        <input type="radio" name="outer-accordion" defaultChecked />
-                        <div className="collapse-title text-xl font-medium">
-                            Formal Language and Automata Theory
-                        </div>
-                        <div className="collapse-content space-y-2">
-                        <h3 className='text-red-500 text-bold'>Tips 1 - <span>Tough subjects, always prepare before the exam, and make your own notes</span></h3>
-                            <h3 className='text-red-500 text-bold'>Tips 2- <span>Do Pratice from PYQ's </span></h3>
-                            <div className="text-left p-4">
-                                <ul className="list-disc space-y-4 ml-5 text-justify">
-                                    <li>
-                                        <strong>Module-I  </strong><br />
-                                        Introduction to Automata (mathematical model of digital devices 
-                                        including real computer) for computation, State Transition Graph, Finite  Automaton 
-                                        (FA)   and    its    types,   Deterministic   Finite  Automaton (DFA),  Non-deterministic 
-                                        Finite   Automaton (NDFA), Complement, Union, Intersection of  FA’s , Conversion
-                                        Strategy  from   NDFA  to   DFA , Minimization  of   FA,  Finite   Automaton with Output, Applications of  FA
-                                    </li>
-
-                                    <li>
-                                        <strong>Module–II : REGULAR EXPRESSION </strong><br />
-                                        R.E.’s    and  basic operations,   
-                                        Algebraic  laws  on  Regular Expression,  Finite   and  Infinite Languages, 
-                                        Equivalence of finite Automaton and regular expressions,  Constructing   NDFA   
-                                        from  Regular  Expression ,   Pumping  Lemma  for   Regular   Language,  Closure 
-                                        properties of  Regular Languages,  Non-regular languages, Applications   of  Regular  
-                                        Expression.
-                                    </li>
-
-                                    <li>
-                                        <strong>Module–III </strong><br />
-                                        Introduction,  Formal   Definition   of   Grammar, The  Chomsky   
-                                        Hierarchy of Grammar,  Designing  Regular grammar  from  DFA, Context Free 
-                                        Grammar, Closure  properties  of  Context Free Languages,  CFG  and Normal form: 
-                                        Chomsky Normal Form, Greibach  Normal Form, Non-Context Free Language, 
-                                        Applications of CFGs.
-                                    </li>
-
-                                    <li>
-                                        <strong>MODULE – IV : PUSHDOWN AUTOMATON (PDA)</strong><br />
-                                        Introduction,   Definition of 
-                                        PDA, Types of Pushdown Automata (DPDA and NPDA),  Converting CFG to PDA,  
-                                        Derivation (Parsing),  Parsing Techniques,  Ambiguous  and  Unambiguous 
-                                        Grammar, Demerits of Ambiguous  Grammar.
-                                    </li>
-
-                                    <li>
-                                        <strong>MODULE – V : TURING MACHINE(TM)</strong><br />
-                                        Single Tape TM,   Variations of TM, 
-                                        Halting  Problem, Turing Machine and Languages, Enumerable Languages, 
-                                        Decidable, Undecidable languages,  Introduction to classes  of  Problems: P, NP, NP
-                                        C and NP-Hard.
-                                    </li>
-
-                                </ul>
-                                <hr></hr>
-                                <div className="mt-2 px-4">
-                                    <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{ color: "red" }}></i></h2>
-                                    <ul className="list-none space-y-2 ml-1">
-                                        <li>
-                                            <a
-                                                href="https://youtube.com/playlist?list=PL1QH9gyQXfgsUBfYUR0WirJASgif4pHVX&si=bNqasaCOFiDJ9M4T"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="flex items-center gap-2 text-red-600 hover:underline"
-                                            >
-                                                <i className="ri-youtube-fill"></i>
-                                                <b>THE GATEHUB</b>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a
-                                                href="https://youtube.com/playlist?list=PLxCzCOWd7aiFM9Lj5G9G_76adtyb4ef7i&si=J4u1npyxx61yTN5R"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="flex items-center gap-2 text-red-600 hover:underline"
-                                            >
-                                                <i className="ri-youtube-fill"></i>
-                                                <b>Gate Smashers</b>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    
-                                    <hr></hr>
-
-                                    <h2 className="text-lg font-semibold mt-2"> NOTES - <i className="fa-solid fa-file-arrow-down fa-lg"></i></h2>
-                                    <ul className="list-none space-y-2 ml-1">
-                                        <li>
-                                            <i className="ri-file-download-line"></i>
-                                            <b className='text-blue-500'> coming soon..</b>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
                     {/*NM*/}
                     <div className="collapse collapse-plus bg-base-200 mt-2">
                         <input type="radio" name="outer-accordion" defaultChecked />
@@ -510,6 +294,87 @@ return (
                         </div>
                     </div>
 
+                    {/*Introduction to AI*/}
+                    <div className="collapse collapse-plus bg-base-200 mt-2">
+                        <input type="radio" name="outer-accordion" defaultChecked />
+                        <div className="collapse-title text-xl font-medium">
+                            INTRODUCTION TO ARTIFICIAL AND INTELLIGENCE
+                        </div>
+                        <div className="collapse-content space-y-2">
+                        <h3 className='text-red-500 text-bold'>Tips 1 - <span>Tough subjects, always prepare before the exam, and make your own notes</span></h3>
+                            <h3 className='text-red-500 text-bold'>Tips 2- <span>Do Pratice from PYQ's </span></h3>
+                            <div className="text-left p-4">
+                                <ul className="list-disc space-y-4 ml-5 text-justify">
+                                    <li>
+                                        <strong> Module 1: Introduction and Propositional Logic  </strong><br />
+                                        What Is Artificial Intelligence? Agents,  Knowledge-Based Systems, Propositional Logic – Syntax, Semantics, Proof Systems, Resolution, Horn Clauses, Computability and Complexity 
+                                    </li>
+
+                                    <li>
+                                        <strong>Module 2: First Order Predicate Logic  </strong><br />
+                                        Syntax, Semantics, Quantifiers and Normal Forms, Proof Calculi, Resolution, Automated Theorem 
+                                        Provers, Applications and Limitations 
+                                    </li>
+
+                                    <li>
+                                        <strong>Module 3: Search Games and Problem Solving  </strong><br />
+                                        Introduction, Uninformed Search, Heuristic Search, Games with Opponents, Heuristic Evaluation functions 
+                                    </li>
+
+                                    <li>
+                                        <strong>Module 4: Reasoning with Uncertainity  (PDA)</strong><br />
+                                        Computing with Probabilities, The principal of Maximum Entropy, Reasoning with Bayesian 
+                                        Networks 
+                                    </li>
+
+                                    <li>
+                                        <strong>Module 5: An Introduction to Reinforcement Learning </strong><br />
+                                        Definitions, Uninformed combinatorial search, Value iteration and Dynamic Programming, QLearning, Exploration and Exploitation, Approximation, Generalization and Convergence, the Curse of Dimensionality  
+                                    </li>
+
+                                    </ul>
+                                <hr></hr>
+                                <div className="mt-2 px-4">
+                                    <h2 className="text-lg font-semibold mb-2">YouTube Links <i className="fa-brands fa-youtube fa-lg" style={{ color: "red" }}></i></h2>
+                                    <ul className="list-none space-y-2 ml-1">
+                                        <li>
+                                            <a
+                                                href="https://youtube.com/playlist?list=PLxCzCOWd7aiHGhOHV-nwb0HR5US5GFKFI&si=eBy-a24XXKGkRK0G"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="flex items-center gap-2 text-red-600 hover:underline"
+                                            >
+                                                <i className="ri-youtube-fill"></i>
+                                                <b>Gate Smashers</b>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a
+                                                href="https://youtube.com/playlist?list=PL4gu8xQu0_5JrWjrWNMmXNx4zFwRrpqCR&si=TQLXf1oIUjhf4-1F"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="flex items-center gap-2 text-red-600 hover:underline"
+                                            >
+                                                <i className="ri-youtube-fill"></i>
+                                                <b>Mahesh Huddar</b>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    
+                                    <hr></hr>
+
+                                    <h2 className="text-lg font-semibold mt-2"> NOTES - <i className="fa-solid fa-file-arrow-down fa-lg"></i></h2>
+                                    <ul className="list-none space-y-2 ml-1">
+                                        <li>
+                                            <i className="ri-file-download-line"></i>
+                                            <b className='text-blue-500'> coming soon..</b>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     {/*Open Elective - I /MOOC - I */}
                     <div className="collapse collapse-plus bg-base-200 mt-2">
                         <input type="radio" name="outer-accordion" defaultChecked />
@@ -553,4 +418,4 @@ return (
 )
 }
 
-export default CseSem4
+export default AimlSem4

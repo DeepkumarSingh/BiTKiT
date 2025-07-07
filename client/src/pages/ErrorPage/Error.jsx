@@ -6,11 +6,11 @@ import Footer from '../../components/Footer';
 function Error() {
   return (
     <div className="layout">
-  <Navbar />
+  {/* <Navbar /> */}
   <main className="content">
     <PageNotFound />
   </main>
-  <Footer />
+  {/* <Footer /> */}
 </div>
   );
 }

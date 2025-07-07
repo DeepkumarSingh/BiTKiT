@@ -4,7 +4,6 @@ import Footer from '../../../../components/Footer';
 function CseSem2() {
     return (
         <>
-            <Navbar />
             <div className='min-h-screen text-center md:w-[1000px] mx-auto'>
                 <h2 className='font-bold text-2xl mt-4 mb-6'>Semester 2</h2>
 
@@ -119,7 +118,7 @@ function CseSem2() {
                                                 rel="noreferrer"
                                                 className="flex items-center gap-2 text-blue-600 hover:underline"
                                             >
-                                                <i className="ri-youtube-fill"></i>
+                                                <i className="ri-file-download-line"></i>
                                                 <b>2022 Notes</b>
                                             </a>
                                         </li>
@@ -209,7 +208,7 @@ function CseSem2() {
                                                 rel="noreferrer"
                                                 className="flex items-center gap-2 text-blue-600 hover:underline"
                                             >
-                                                <i className="ri-youtube-fill"></i>
+                                                <i className="ri-file-download-line"></i>
                                                 <b>2022 Notes</b>
                                             </a>
                                         </li>
@@ -282,7 +281,7 @@ function CseSem2() {
                                                 rel="noreferrer"
                                                 className="flex items-center gap-2 text-blue-600 hover:underline"
                                             >
-                                                <i className="ri-youtube-fill"></i>
+                                                <i className="ri-file-download-line"></i>
                                                 <b>Notes(Mod-1)</b>
                                             </a>
                                         </li>
@@ -417,7 +416,7 @@ function CseSem2() {
                                                 rel="noreferrer"
                                                 className="flex items-center gap-2 text-blue-600 hover:underline"
                                             >
-                                                <i className="ri-youtube-fill"></i>
+                                                <i className="ri-file-download-line"></i>
                                                 <b>Apna college - Notes</b>
                                             </a>
                                         </li>
@@ -428,7 +427,7 @@ function CseSem2() {
                                                 rel="noreferrer"
                                                 className="flex items-center gap-2 text-blue-600 hover:underline"
                                             >
-                                                <i className="ri-youtube-fill"></i>
+                                                <i className="ri-file-download-line"></i>
                                                 <b>Student - Notes</b>
                                             </a>
                                         </li>
@@ -541,8 +540,8 @@ function CseSem2() {
                                                 rel="noreferrer"
                                                 className="flex items-center gap-2 text-blue-600 hover:underline"
                                             >
-                                                <i className="ri-youtube-fill"></i>
-                                                <b>Book for Pratice - Basic Electrical Engineering(D P Kothari & I J Nagrath) </b>
+                                                <i className="ri-file-download-line"></i>
+                                                <b>Book for Practice - Basic Electrical Engineering(D P Kothari & I J Nagrath) </b>
                                             </a>
                                         </li>
                                     </ul>
@@ -559,7 +558,7 @@ function CseSem2() {
                                 <span className='text-pink-500'>Note:</span> Check the official site for all previous year papers (click the given below link)
                                 <div className="mt-2 px-4">
                                     <a
-                                        href="https://archive.bitmesra.ac.in/Visit_Other_Department_9910?cid=1&deptid=258&pid=361"
+                                        href="https://www.bitmesra.ac.in/Other-Department-Pages/content/1/258/361"
                                         target="_blank"
                                         rel="noreferrer"
                                         className="flex items-center gap-2 text-red-600 hover:underline"
@@ -571,7 +570,6 @@ function CseSem2() {
 
                 </div>
             </div>
-            <Footer />
         </>
     )
 }

@@ -545,7 +545,7 @@ function MechSem2() {
                                 <span className='text-pink-500'>Note:</span> Check the official site for all previous year papers (click the given below link)
                                 <div className="mt-2 px-4">
                                     <a
-                                        href="https://archive.bitmesra.ac.in/Visit_Other_Department_9910?cid=1&deptid=258&pid=361"
+                                        href="https://www.bitmesra.ac.in/Other-Department-Pages/content/1/258/361"
                                         target="_blank"
                                         rel="noreferrer"
                                         className="flex items-center gap-2 text-red-600 hover:underline"

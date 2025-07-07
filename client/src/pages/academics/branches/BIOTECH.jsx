@@ -8,8 +8,8 @@ function BIOTECH() {
         {/* <Navbar/> */}
                 <div className='min-h-screen text-center md:w-[400px] mx-auto'
                 >
-                    <h2 className='text-bold text-3xl mt-2 mb-3'> Bio-Engineering & Bio-Technology </h2>
-                    <h4 className='text-bold mt-1 mb-3'> Choose your Semester </h4>
+                    <h2 className='text-bold text-xl mt-2 mb-3'> Bio-Engineering & Bio-Technology </h2>
+                    <h4 className='text-bold text-sm mt-1 mb-3'> Choose your Semester </h4>
                     <div className='dark:bg-slate-900 dark:text-black text-black'>
                         <div className="collapse collapse-plus bg-base-200 mt-1">
                             <input type="radio" name="my-accordion-3" defaultChecked />
@@ -68,6 +68,11 @@ function BIOTECH() {
                                 <a href="/"><span className='text-blue-500'>click-here</span></a>
                             </div>
                         </div> */}
+                    </div>
+                    <div>
+                        <h4 className='text-bold text-sm mt-5 mb-3 text-red-500'> Note - 
+                        <span className="text-white"> If you have better study resources like notes or YouTube links, feel free to share them with BiTKiT</span></h4>
+                        <a href="https://forms.gle/kwAQt329rWNK99F9A" className="text-blue-400 underline" target="_blank" rel="noopener noreferrer">Contribute</a>
                     </div>
                 </div>
                 {/* <Footer /> */}

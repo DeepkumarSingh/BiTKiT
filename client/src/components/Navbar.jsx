@@ -235,7 +235,7 @@ import { Link, useLocation } from "react-router-dom";
 
 function Navbar() {
   const forumUser = useSelector((state) => state.users.forumUser);
-
+  const [isOthersOpen, setIsOthersOpen] = useState(false);
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
@@ -251,6 +251,12 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close "Others" dropdown when route changes
+  useEffect(() => {
+    setIsOthersOpen(false);
+  }, [pathname]);
+
+  // Theme logic
   const element = document.documentElement;
   useEffect(() => {
     if (theme === "dark") {
@@ -264,14 +270,21 @@ function Navbar() {
     }
   }, [theme]);
 
+  // Auto close dropdown + scroll to top
+  const closeOthersDropdownWithDelay = () => {
+    setTimeout(() => {
+      setIsOthersOpen(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 2000);
+  };
+
   const navLinkClasses = (path) =>
     `relative py-2 px-2 after:absolute after:left-0 after:-bottom-1 after:w-full after:h-0.5 
      after:bg-pink-500 after:scale-x-0 after:origin-left after:transition-transform after:duration-300 
-     hover:after:scale-x-100 ${
-       pathname === path
-         ? "after:scale-x-100 font-semibold text-pink-600 dark:text-pink-400"
-         : ""
-     }`;
+     hover:after:scale-x-100 ${pathname === path
+      ? "after:scale-x-100 font-semibold text-pink-600 dark:text-pink-400"
+      : ""
+    }`;
 
   const navItems = (
     <>
@@ -281,22 +294,30 @@ function Navbar() {
       <li><Link to="/disc_forum_homepage" className={navLinkClasses("/disc_forum_homepage")}>Discussion Forum</Link></li>
       <li><Link to="/clubs" className={navLinkClasses("/clubs")}>Clubs & Communities</Link></li>
       <li className="dropdown dropdown-hover">
-        <details className="dropdown">
+        <details
+          className="dropdown"
+          open={isOthersOpen}
+          onClick={() => setIsOthersOpen(!isOthersOpen)}
+        >
           <summary className="cursor-pointer py-2 px-2">Others</summary>
           <ul className="p-2 bg-white dark:bg-slate-800 shadow rounded-md z-50 w-40">
-            <li><Link to="/sport" className={navLinkClasses("/sport")}>Sports</Link></li>
+            <li>
+              <Link to="/sport" className={navLinkClasses("/sport")} onClick={closeOthersDropdownWithDelay}>Sports</Link>
+            </li>
             <li>
               <a
                 href="https://www.bitotsav.com"
                 target="_blank"
                 rel="noreferrer"
                 className="block px-2 py-1 hover:bg-gray-200 dark:hover:bg-slate-700 rounded"
+                onClick={closeOthersDropdownWithDelay}
               >
                 Bitotsav
               </a>
             </li>
-            <li><Link to="/map" className={navLinkClasses("/map")}>Map</Link></li>
-            <li><Link to="/downloads" className={navLinkClasses("/downloads")}>Downloads</Link></li>
+            <li>
+              <Link to="/downloads" className={navLinkClasses("/downloads")} onClick={closeOthersDropdownWithDelay}>Downloads</Link>
+            </li>
           </ul>
         </details>
       </li>
@@ -304,8 +325,7 @@ function Navbar() {
   );
 
   return (
-    <div className={`w-full sticky top-0 z-50 bg-white bg-opacity-95 dark:bg-slate-900 dark:text-white ${
-        sticky ? "shadow-md dark:bg-slate-800 transition-all duration-300 ease-in-out" : ""
+    <div className={`w-full sticky top-0 z-50 bg-white bg-opacity-95 dark:bg-slate-900 dark:text-white ${sticky ? "shadow-md dark:bg-slate-800 transition-all duration-300 ease-in-out" : ""
       }`}
     >
       <div className="max-w-screen-2xl container mx-auto md:px-5">
@@ -333,15 +353,8 @@ function Navbar() {
 
           <div className="navbar-end space-x-3">
             {/* Theme Switcher */}
-             <label className="swap swap-rotate">
-              {/* this hidden checkbox controls the state */}
-              <input
-                type="checkbox"
-                className="theme-controller"
-                value="synthwave"
-              />
-
-              {/* sun icon */}
+            <label className="swap swap-rotate">
+              <input type="checkbox" className="theme-controller" value="synthwave" />
               <svg
                 className="swap-off h-8 w-8 fill-current"
                 xmlns="http://www.w3.org/2000/svg"
@@ -350,8 +363,6 @@ function Navbar() {
               >
                 <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
               </svg>
-
-              {/* moon icon */}
               <svg
                 className="swap-on h-8 w-8 fill-current"
                 xmlns="http://www.w3.org/2000/svg"

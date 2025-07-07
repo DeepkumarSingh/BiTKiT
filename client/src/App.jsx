@@ -214,7 +214,10 @@ import { setForumUser, setBuySellUser } from "./redux/usersSlice";
 
 import { analytics } from "./firebase";
 import { logEvent } from "firebase/analytics";
-
+import AimlSem3 from "./pages/academics/branches/AIML-dept/AimlSem3.jsx";
+import AimlSem4 from "./pages/academics/branches/AIML-dept/AimlSem4.jsx";
+import AimlSem5 from "./pages/academics/branches/AIML-dept/AimlSem5.jsx";
+import AimlSem6 from "./pages/academics/branches/AIML-dept/AimlSem6.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -263,6 +266,10 @@ function App() {
             <Route path="/course/cse/cse_sem5" element={<CseSem5 />} />
             <Route path="/course/cse/cse_sem6" element={<CseSem6 />} />
             <Route path="/course/aiml" element={<AIML />} />
+            <Route path="/course/aiml/aiml_sem3" element={<AimlSem3 />} />
+            <Route path="/course/aiml/aiml_sem4" element={<AimlSem4 />} />
+            <Route path="/course/aiml/aiml_sem5" element={<AimlSem5 />} />
+            <Route path="/course/aiml/aiml_sem6" element={<AimlSem6 />} />
             <Route path="/course/ece" element={<ECE />} />
             <Route path="/course/eee" element={<EEE />} />
             <Route path="/course/me" element={<ME />} />

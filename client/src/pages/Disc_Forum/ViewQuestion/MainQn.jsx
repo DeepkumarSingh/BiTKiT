@@ -578,12 +578,12 @@ function MainQn() {
         <ReactQuill
           value={answer}
           onChange={handleQuillChange}
-          className="bg-white dark:bg-gray-900"
+          className="bg-white dark:bg-gray-900 "
           theme="snow"
           style={{ height: "200px" }}
         />
         <button
-          className="mt-12 rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+          className="mt-20 md:mt-12 rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
           onClick={handleSubmit}
         >
           Post your Answer
