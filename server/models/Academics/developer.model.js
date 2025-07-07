@@ -3,11 +3,13 @@ const {academicsConn} = require("../../config/connectDB");
 
 // defining the developerSchema
 const developerSchema = mongoose.Schema({
-    name:String,
-    Title:String,
-    Roll_Number:String,
-    image:String,
-    profile:String
+    id: Number,
+    name: String,
+    Title: String,
+    Roll_Number: String,
+    image: String,
+    Profile: String,
+    Section: String,
 })
 
 const Developer = academicsConn.model("Developer", developerSchema);

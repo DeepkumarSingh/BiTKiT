@@ -9,9 +9,9 @@ const voteRoute = require('./routes/Disc_Forum/vote');
 const authRoutes = require('./routes/Disc_Forum/authRoutes');
 const tagsRoute = require('./routes/Disc_Forum/tags');
 const deleteQnRoute = require('./routes/Disc_Forum/DeleteQn'); // Importing DeleteQn route
-
-
+// Importing Developer route(All members of the team are developers)
 const developerRoute = require('./routes/Academics/developerRoute');
+const cors = require("cors");
 
 
 const usersRoute = require("./routes/Buy_Sell/usersRoute");
@@ -29,6 +29,12 @@ const { forumConn, academicsConn } = require('./config/connectDB');
 // Initialize Express app
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -62,7 +68,8 @@ app.use("/api/v1/buy-sell/products", productsRoute);
 app.use("/api/v1/buy-sell/bids", bidsRoute);
 app.use("/api/v1/buy-sell/notifications", notificationsRoute);
 
-
+// Importing Developer route(All members of the team are developers)
+app.use('/api/v1/academics', developerRoute);
 
 // Start the server
 app.listen(PORT, () => {
