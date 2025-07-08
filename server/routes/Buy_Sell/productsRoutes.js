@@ -11,34 +11,24 @@ const { sendEmail } = require("../../utils/sendEmail");
 const router = express.Router();
 
 // add a new product
-router.post("/add-product",authMiddleware, async (req, res) => {
+router.post("/add-product", authMiddleware, async (req, res) => {
   try {
     const newProduct = new Product(req.body);
-    await newProduct.save();
+    const savedProduct = await newProduct.save();
 
     // find all admins
     const admins = await User.find({ role: "admin" });
-    console.log("All admins",admins);
 
     admins.forEach(async (admin) => {
-      // // App notification
-      // const newNotification = new Notification({
-      //   user: admin._id,
-      //   message: `New product added${req.user?.name ? " by " + req.user.name : ""}.`,
-      //   title: "New product",
-      //   onClick: "/admin",
-      //   read: false,
-      // });
-      // await newNotification.save();
-
-      // Email notification
       if (admin.email) {
         await sendEmail({
           to: admin.email,
           subject: "New Product Added on BiTKiT",
           html: `
             <p>Hello ${admin.name},</p>
-            <p>A new product has been added to BiTKiT${req.user?.name ? ` by <strong>${req.user.name}</strong>` : ""}.</p>
+            <p>A new product has been added to BiTKiT${
+              req.user?.name ? ` by <strong>${req.user.name}</strong>` : ""
+            }.</p>
             <p>Visit <a href="http://localhost:5173/admin">BiTKiT Admin Panel</a> to review it.</p>
             <br/>
             <p>– Team BiTKiT</p>
@@ -49,7 +39,8 @@ router.post("/add-product",authMiddleware, async (req, res) => {
 
     res.send({
       success: true,
-      message: "Product added successfully",
+      message: "Product added and sent for approval",
+      product: savedProduct, // ✅ important for frontend to get _id
     });
   } catch (error) {
     res.send({
@@ -114,7 +105,7 @@ router.get("/get-product-by-id/:id", async (req, res) => {
 });
 
 // edit a product
-router.put("/edit-product/:id",authMiddleware, async (req, res) => {
+router.put("/edit-product/:id", authMiddleware, async (req, res) => {
   try {
     await Product.findByIdAndUpdate(req.params.id, req.body);
     res.send({
@@ -130,17 +121,42 @@ router.put("/edit-product/:id",authMiddleware, async (req, res) => {
 });
 
 // delete a product
-router.delete("/delete-product/:id",authMiddleware, async (req, res) => {
+router.delete("/delete-product/:id", authMiddleware, async (req, res) => {
   try {
+    // Fetch product and populate seller before deletion
+    const product = await Product.findById(req.params.id).populate("seller");
+
+    if (!product || !product.seller?.email) {
+      return res.send({
+        success: false,
+        message: "Product or seller not found",
+      });
+    }
+
     // First, delete all bids related to the product
     await Bid.deleteMany({ product: req.params.id });
 
     // Then, delete the product itself
     await Product.findByIdAndDelete(req.params.id);
 
+    // ✅ Send email only if the user is an admin
+    if (req.user?.role === "admin") {
+      await sendEmail({
+        to: product.seller.email,
+        subject: `Your Product Has Been Deleted`,
+        html: `
+          <p>Hello ${product.seller.name},</p>
+          <p>Your product <strong>${product.name}</strong> has been <strong>deleted</strong> by the BiTKiT admin team.</p>
+          <p>If you believe this was a mistake, please contact support.</p>
+          <br/>
+          <p>– Team BiTKiT</p>
+        `,
+      });
+    }
+
     res.send({
       success: true,
-      message: "Product and associated bids deleted successfully",
+      message: "Product deleted successfully",
     });
   } catch (error) {
     res.send({
@@ -185,7 +201,7 @@ router.post(
 );
 
 // update product status
-router.put("/update-product-status/:id",authMiddleware, async (req, res) => {
+router.put("/update-product-status/:id", authMiddleware, async (req, res) => {
   try {
     const { status } = req.body;
 

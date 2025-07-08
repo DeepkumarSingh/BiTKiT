@@ -66,7 +66,7 @@ app.use('/api/v1/academics', developerRoute);
 app.use("/api/v1/buy-sell/users", usersRoute);
 app.use("/api/v1/buy-sell/products", productsRoute);
 app.use("/api/v1/buy-sell/bids", bidsRoute);
-app.use("/api/v1/buy-sell/notifications", notificationsRoute);
+// app.use("/api/v1/buy-sell/notifications", notificationsRoute);
 
 // Importing Developer route(All members of the team are developers)
 app.use('/api/v1/academics', developerRoute);
