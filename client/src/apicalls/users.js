@@ -1,9 +1,10 @@
-import { axiosInstance } from "./axiosInstance";
+// import { axiosInstance } from "./axiosInstance";
+import axiosInstance from "../utils/axiosInstance";
 
 // register user
 export const RegisterUser = async (payload) => {
   try {
-    const response = await axiosInstance.post("/users/register", payload);
+    const response = await axiosInstance.post("/buy-sell/users/register", payload);
     return response.data;
   } catch (error) {
     return error.message;
@@ -13,7 +14,7 @@ export const RegisterUser = async (payload) => {
 // login user
 export const LoginUser = async (payload) => {
   try {
-    const response = await axiosInstance.post("/users/login", payload);
+    const response = await axiosInstance.post("/buy-sell/users/login", payload);
 
     // Debug: check if user and role are present
     console.log("Login Response:", response.data);
@@ -35,7 +36,7 @@ export const LoginUser = async (payload) => {
 // get current user
 export const GetCurrentUser = async () => {
   try {
-    const response = await axiosInstance.get("/users/get-current-user");
+    const response = await axiosInstance.get("/buy-sell/users/get-current-user");
     return response.data;
   } catch (error) {
     return error.message;
@@ -45,7 +46,7 @@ export const GetCurrentUser = async () => {
 // get all users
 export const GetAllUsers = async () => {
   try {
-    const response = await axiosInstance.get("/users/get-users");
+    const response = await axiosInstance.get("/buy-sell/users/get-users");
     return response.data;
   } catch (error) {
     return error.message;
@@ -56,7 +57,7 @@ export const GetAllUsers = async () => {
 export const UpdateUserStatus = async (id, status) => {
   try {
     const response = await axiosInstance.put(
-      `/users/update-user-status/${id}`,
+      `/buy-sell/users/update-user-status/${id}`,
       { status }
     );
     return response.data;

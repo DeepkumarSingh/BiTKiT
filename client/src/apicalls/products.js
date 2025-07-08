@@ -1,10 +1,11 @@
-import { axiosInstance } from "./axiosInstance";
+// import { axiosInstance } from "./axiosInstance";
+import  axiosInstance  from "../utils/axiosInstance";
 
 // add a new product
 export const AddProduct = async (payload) => {
   try {
     const response = await axiosInstance.post(
-      "/products/add-product",
+      "/buy-sell/products/add-product",
       payload
     );
     return response.data;
@@ -17,7 +18,7 @@ export const AddProduct = async (payload) => {
 export const GetProducts = async (filters) => {
   try {
     const response = await axiosInstance.post(
-      "/products/get-products",
+      "/buy-sell/products/get-products",
       filters || {}
     );
     return response.data;
@@ -30,7 +31,7 @@ export const GetProducts = async (filters) => {
 export const EditProduct = async (id, payload) => {
   try {
     const response = await axiosInstance.put(
-      `/products/edit-product/${id}`,
+      `/buy-sell/products/edit-product/${id}`,
       payload
     );
     return response.data;
@@ -43,7 +44,7 @@ export const EditProduct = async (id, payload) => {
 export const GetProductById = async (id) => {
   try {
     const response = await axiosInstance.get(
-      `/products/get-product-by-id/${id}`
+      `/buy-sell/products/get-product-by-id/${id}`
     );
     return response.data;
   } catch (error) {
@@ -55,7 +56,7 @@ export const GetProductById = async (id) => {
 export const DeleteProduct = async (id) => {
   try {
     const response = await axiosInstance.delete(
-      `/products/delete-product/${id}`
+      `/buy-sell/products/delete-product/${id}`
     );
     return response.data;
   } catch (error) {
@@ -67,7 +68,7 @@ export const DeleteProduct = async (id) => {
 export const UploadProductImage = async (payload) => {
   try {
     const response = await axiosInstance.post(
-      "/products/upload-image-to-product",
+      "/buy-sell/products/upload-image-to-product",
       payload
     );
     return response.data;
@@ -80,7 +81,7 @@ export const UploadProductImage = async (payload) => {
 export const UpdateProductStatus = async (id, status) => {
   try {
     const response = await axiosInstance.put(
-      `/products/update-product-status/${id}`,
+      `/buy-sell/products/update-product-status/${id}`,
       { status }
     );
     return response.data;
@@ -93,7 +94,7 @@ export const UpdateProductStatus = async (id, status) => {
 export const PlaceNewBid = async (payload) => {
   try {
     const response = await axiosInstance.post(
-      "/bids/place-new-bid",
+      "/buy-sell/bids/place-new-bid",
       payload
     );
     return response.data;
@@ -106,7 +107,7 @@ export const PlaceNewBid = async (payload) => {
 export const GetAllBids = async (filters) => {
   try {     
     const response = await axiosInstance.post(
-      "/bids/get-all-bids",
+      "/buy-sell/bids/get-all-bids",
       filters || {}
     );
     return response.data;

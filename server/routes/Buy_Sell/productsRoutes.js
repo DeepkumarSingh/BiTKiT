@@ -11,7 +11,7 @@ const { sendEmail } = require("../../utils/sendEmail");
 const router = express.Router();
 
 // add a new product
-router.post("/add-product", async (req, res) => {
+router.post("/add-product",authMiddleware, async (req, res) => {
   try {
     const newProduct = new Product(req.body);
     await newProduct.save();
@@ -114,7 +114,7 @@ router.get("/get-product-by-id/:id", async (req, res) => {
 });
 
 // edit a product
-router.put("/edit-product/:id", async (req, res) => {
+router.put("/edit-product/:id",authMiddleware, async (req, res) => {
   try {
     await Product.findByIdAndUpdate(req.params.id, req.body);
     res.send({
@@ -130,7 +130,7 @@ router.put("/edit-product/:id", async (req, res) => {
 });
 
 // delete a product
-router.delete("/delete-product/:id", async (req, res) => {
+router.delete("/delete-product/:id",authMiddleware, async (req, res) => {
   try {
     // First, delete all bids related to the product
     await Bid.deleteMany({ product: req.params.id });
@@ -185,7 +185,7 @@ router.post(
 );
 
 // update product status
-router.put("/update-product-status/:id", async (req, res) => {
+router.put("/update-product-status/:id",authMiddleware, async (req, res) => {
   try {
     const { status } = req.body;
 

@@ -1,13 +1,13 @@
 const express = require("express");
-const authMiddleware = require("../../middlewares/authMiddleware");
 const Bid = require("../../models/Buy_Sell/bidModel");
 const Product = require("../../models/Buy_Sell/productModel");
 const { sendEmail } = require("../../utils/sendEmail");
+const authMiddleware = require('../../middlewares/authMiddleware');
 
 const router = express.Router();
 
 // place a new bid
-router.post("/place-new-bid", async (req, res) => {
+router.post("/place-new-bid",authMiddleware, async (req, res) => {
   try {
     const { product: productId, amount } = req.body;
     const newBid = new Bid(req.body);
@@ -45,7 +45,7 @@ router.post("/place-new-bid", async (req, res) => {
 });
 
 // get all bids
-router.post("/get-all-bids", async (req, res) => {
+router.post("/get-all-bids",authMiddleware, async (req, res) => {
   try {
     const { product, seller, buyer } = req.body;
     let filters = {};

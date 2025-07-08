@@ -5,7 +5,7 @@ const Notification = require("../../models/Buy_Sell/notificationModel");
 const router = express.Router();
 
 // add a new notification
-router.post("/notify", async (req, res) => {
+router.post("/notify",authMiddleware, async (req, res) => {
   try {
     const newNotification = new Notification(req.body);
     await newNotification.save();
@@ -41,7 +41,7 @@ router.get("/get-all-notifications", authMiddleware, async (req, res) => {
 });
 
 // delete a notification
-router.delete("/delete-notification/:id", async (req, res) => {
+router.delete("/delete-notification/:id",authMiddleware, async (req, res) => {
   try {
     await Notification.findByIdAndDelete(req.params.id);
     res.send({
@@ -57,7 +57,7 @@ router.delete("/delete-notification/:id", async (req, res) => {
 });
 
 // read all notifications by user
-router.put("/read-all-notifications", async (req, res) => {
+router.put("/read-all-notifications",authMiddleware, async (req, res) => {
   try {
     await Notification.updateMany(
       { user: req.userId, read: false },
