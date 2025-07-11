@@ -39,7 +39,7 @@ router.post("/add-product", authMiddleware, async (req, res) => {
 
     res.send({
       success: true,
-      message: "Product added and sent for approval",
+      message: "Product added. Upload images for approval.",
       product: savedProduct, // ✅ important for frontend to get _id
     });
   } catch (error) {
@@ -136,11 +136,18 @@ router.delete("/delete-product/:id", authMiddleware, async (req, res) => {
     // First, delete all bids related to the product
     await Bid.deleteMany({ product: req.params.id });
 
+    // Delete all product images from Cloudinary
+    const deleteImagePromises = product.images.map((img) =>
+      cloudinary.uploader.destroy(img.public_id)
+    );
+    await Promise.all(deleteImagePromises);
+
     // Then, delete the product itself
     await Product.findByIdAndDelete(req.params.id);
 
     // ✅ Send email only if the user is an admin
-    if (req.user?.role === "admin") {
+    const isAdmin = req.user.email === "btech10649.22@bitmesra.ac.in";
+    if (isAdmin) {
       await sendEmail({
         to: product.seller.email,
         subject: `Your Product Has Been Deleted`,
@@ -184,12 +191,21 @@ router.post(
       });
       const productId = req.body.productId;
       await Product.findByIdAndUpdate(productId, {
-        $push: { images: result.secure_url },
+        $push: {
+          images: {
+            url: result.secure_url,
+            public_id: result.public_id,
+          },
+        },
       });
+
       res.send({
         success: true,
         message: "Image uploaded successfully",
-        data: result.secure_url,
+        data: {
+          url: result.secure_url,
+          public_id: result.public_id,
+        },
       });
     } catch (error) {
       res.send({
@@ -218,28 +234,22 @@ router.put("/update-product-status/:id", authMiddleware, async (req, res) => {
       });
     }
 
-    // App notification to seller
-    // const newNotification = new Notification({
-    //   user: updatedProduct.seller._id,
-    //   message: `Your product ${updatedProduct.name} has been ${status}.`,
-    //   title: "Product status updated",
-    //   onClick: "/profile",
-    //   read: false,
-    // });
-    // await newNotification.save();
-
     // Send email to seller
-    await sendEmail({
-      to: updatedProduct.seller.email,
-      subject: `Your Product Status Has Been Updated`,
-      html: `
-        <p>Hello ${updatedProduct.seller.name},</p>
-        <p>Your product <strong>${updatedProduct.name}</strong> has been <strong>${status}</strong> by BiTKiT admin team.</p>
-        <p>Visit your <a href="http://localhost:5173/profile">profile</a> to view details.</p>
-        <br/>
-        <p>– Team BiTKiT</p>
-      `,
-    });
+    try {
+      await sendEmail({
+        to: updatedProduct.seller.email,
+        subject: `Your Product Status Has Been Updated`,
+        html: `
+      <p>Hello ${updatedProduct.seller.name},</p>
+      <p>Your product <strong>${updatedProduct.name}</strong> has been <strong>${status}</strong> by BiTKiT admin team.</p>
+      <p>Visit your <a href="http://localhost:5173/profile">profile</a> to view details.</p>
+      <br/>
+      <p>– Team BiTKiT</p>
+    `,
+      });
+    } catch (emailErr) {
+      console.error("✅ Email sent failed but continuing:", emailErr.message);
+    }
 
     res.send({
       success: true,
@@ -247,6 +257,41 @@ router.put("/update-product-status/:id", authMiddleware, async (req, res) => {
     });
   } catch (error) {
     console.error("Error updating product status:", error);
+    res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+
+// Delete product image
+router.post("/delete-product-image", authMiddleware, async (req, res) => {
+  try {
+    const { productId, public_id } = req.body;
+
+    // 1. Delete from Cloudinary
+    const cloudinaryResult = await cloudinary.uploader.destroy(public_id);
+
+    if (cloudinaryResult.result !== "ok") {
+      return res.send({
+        success: false,
+        message: "Failed to delete image from Cloudinary",
+      });
+    }
+
+    // 2. Remove from MongoDB
+    await Product.findByIdAndUpdate(productId, {
+      $pull: {
+        images: { public_id },
+      },
+    });
+
+    res.send({
+      success: true,
+      message: "Image deleted successfully",
+    });
+  } catch (error) {
     res.send({
       success: false,
       message: error.message,
