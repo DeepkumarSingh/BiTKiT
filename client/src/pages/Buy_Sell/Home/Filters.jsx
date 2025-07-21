@@ -39,7 +39,7 @@ function Filters({ showFilters, setShowFilters, filters, setFilters }) {
       </div>
 
       <div className="flex flex-col gap-1 mt-5">
-        <h1 className="text-gray-600 text-lg font-semibold">Categories</h1>
+        <h1 className="text-gray-500 text-lg font-semibold">Categories</h1>
 
         <div className="flex flex-col gap-2">
           {categories.map((category) => {

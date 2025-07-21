@@ -115,3 +115,18 @@ export const GetAllBids = async (filters) => {
     return error.message;
   } 
 };
+
+
+// delete product image
+export const DeleteProductImage = async (payload) => {
+  try {
+    const response = await axiosInstance.post(
+      "/buy-sell/products/delete-product-image",
+      payload
+    );
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};
+

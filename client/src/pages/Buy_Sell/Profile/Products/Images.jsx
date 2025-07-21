@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Upload, Button, message } from "antd";
 import { useDispatch } from "react-redux";
 import { setLoader } from "../../../../redux/loadersSlice";
-import { EditProduct, UploadProductImage } from "../../../../apicalls/products";
+import {
+  EditProduct,
+  UploadProductImage,
+  DeleteProductImage,
+} from "../../../../apicalls/products";
 
 function Images({ selectedProduct, setShowProductForm, getData }) {
   const [showPreview = false, setShowPreview] = useState(true);
@@ -35,27 +39,35 @@ function Images({ selectedProduct, setShowProductForm, getData }) {
       }
     } catch (error) {
       dispatch(setLoader(false));
-      // message.error(error.message);
+      message.error(error.message);
     }
   };
 
   const deleteImage = async (image) => {
     try {
-      const updatedImagesArray = images.filter((img) => img !== image);
-      const updatedProduct = { ...selectedProduct, images: updatedImagesArray };
-      const response = await EditProduct(selectedProduct._id, updatedProduct);
+      dispatch(setLoader(true));
+
+      const response = await DeleteProductImage({
+        productId: selectedProduct._id,
+        public_id: image.public_id,
+      });
+
+      dispatch(setLoader(false));
+
       if (response.success) {
-        message.success(response.message);
+        const updatedImagesArray = images.filter(
+          (img) => img.public_id !== image.public_id
+        );
         setImages(updatedImagesArray);
         setFile(null);
         getData();
+        message.success(response.message);
       } else {
-        throw new Error(response.message);
+        message.error(response.message);
       }
-      dispatch(setLoader(true));
     } catch (error) {
       dispatch(setLoader(false));
-      // message.error(error.message);
+      message.error(error.message);
     }
   };
 
@@ -64,10 +76,11 @@ function Images({ selectedProduct, setShowProductForm, getData }) {
       <div className="flex gap-5 mb-5">
         {images.map((image) => {
           return (
-            <div className="flex gap-2 border border-solid border-gray-500 rounded p-2 items-end">
-              <img className="h-20 w-20 object-cover" src={image} alt="" />
+            <div className="flex gap-2 border border-solid border-gray-500 rounded p-1 items-end">
+              <img className="h-20 w-20 object-cover" src={image.url} alt="" />
+
               <i
-                className="ri-delete-bin-line"
+                className="ri-delete-bin-line text-red-500"
                 onClick={() => deleteImage(image)}
               ></i>
             </div>

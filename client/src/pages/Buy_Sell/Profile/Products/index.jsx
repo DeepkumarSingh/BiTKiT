@@ -15,7 +15,7 @@
 //   const [showProductForm, setShowProductForm] = useState(false);
 
 //   const { user } = useSelector((state) => state.users);
-//   const dispatch = useDispatch(); 
+//   const dispatch = useDispatch();
 
 //   useEffect(() => {
 //     if (user?._id) {
@@ -23,7 +23,7 @@
 //     }
 //   }, [user]);
 
-//   if (!user?._id) return null; 
+//   if (!user?._id) return null;
 
 //   const getData = async () => {
 //     try {
@@ -180,7 +180,8 @@
 
 // export default Products;
 import React, { useEffect, useState } from "react";
-import { Button, Table, message } from "antd";
+import { Button, Table, message, Modal } from "antd"; // ← already imported message
+
 import ProductsForm from "./ProductsForm";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoader } from "../../../../redux/loadersSlice";
@@ -220,23 +221,6 @@ function Products() {
     }
   };
 
-  const deleteProduct = async (id) => {
-    try {
-      dispatch(setLoader(true));
-      const response = await DeleteProduct(id);
-      dispatch(setLoader(false));
-      if (response.success) {
-        message.success(response.message);
-        getData();
-      } else {
-        message.error(response.message);
-      }
-    } catch (error) {
-      dispatch(setLoader(false));
-      message.error(error.message);
-    }
-  };
-
   const columns = [
     {
       title: "Product",
@@ -244,7 +228,7 @@ function Products() {
       width: 100,
       render: (text, record) => (
         <img
-          src={record?.images?.length > 0 ? record.images[0] : ""}
+          src={record?.images?.[0]?.url || ""}
           alt=""
           className="w-20 h-20 object-cover rounded-md"
         />
@@ -263,6 +247,7 @@ function Products() {
     {
       title: "Category",
       dataIndex: "category",
+      render: (text) => text?.toUpperCase(),
       width: 120,
     },
     {
@@ -273,6 +258,7 @@ function Products() {
     {
       title: "Status",
       dataIndex: "status",
+      render: (text) => text?.toUpperCase(),
       width: 100,
     },
     {
@@ -306,12 +292,37 @@ function Products() {
           ></i>
           <i
             className="ri-delete-bin-line text-red-600 cursor-pointer text-xl"
-            onClick={() => deleteProduct(record._id)}
+            onClick={() => showDeleteConfirm(record._id)}
           ></i>
         </div>
       ),
     },
   ];
+
+  const showDeleteConfirm = (productId) => {
+    Modal.confirm({
+      title: "Are you sure you want to delete this product?",
+      okText: "Yes, Delete",
+      okType: "danger",
+      cancelText: "Cancel",
+      onOk: async () => {
+        try {
+          dispatch(setLoader(true));
+          const response = await DeleteProduct(productId);
+          dispatch(setLoader(false));
+          if (response.success) {
+            message.success(response.message);
+            getData();
+          } else {
+            message.error(response.message);
+          }
+        } catch (error) {
+          dispatch(setLoader(false));
+          message.error(error.message);
+        }
+      },
+    });
+  };
 
   return (
     <div className="px-2 sm:px-5">

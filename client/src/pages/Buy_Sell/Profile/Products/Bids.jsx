@@ -12,17 +12,17 @@ function Bids({ showBidsModal, setShowBidsModal, selectedProduct }) {
 
   const getData = async () => {
     try {
-      dispatch(setLoader(true));
+      // dispatch(setLoader(true));
       const response = await GetAllBids({
         product: selectedProduct._id,
       });
-      dispatch(setLoader(false));
+      // dispatch(setLoader(false));
       if (response.success) {
         setBidsData(response.data);
       }
     } catch (error) {
       dispatch(setLoader(false));
-      // message.error(error.message);
+      message.error(error.message);
     }
   };
 

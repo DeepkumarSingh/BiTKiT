@@ -220,7 +220,7 @@ function ProductInfo() {
     try {
       dispatch(setLoader(true));
       const response = await GetProductById(id);
-      dispatch(setLoader(false));
+      
       if (response.success) {
         const bidsResponse = await GetAllBids({ product: id });
         setProduct({
@@ -228,6 +228,7 @@ function ProductInfo() {
           bids: bidsResponse.data,
         });
       }
+      dispatch(setLoader(false));
     } catch (error) {
       dispatch(setLoader(false));
       console.error("Error fetching product data:", error);
@@ -247,7 +248,7 @@ function ProductInfo() {
           <div className="flex flex-col gap-5">
             <img
               className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[500px] object-cover rounded-md"
-              src={product.images[selectedImageIndex]}
+              src={product.images[selectedImageIndex]?.url || ""}
               alt=""
             />
 
@@ -261,13 +262,13 @@ function ProductInfo() {
                       : ""
                   }`}
                   onClick={() => setSelectedImageIndex(index)}
-                  src={image}
+                  src={image?.url || ""}
                   alt=""
                 />
               ))}
             </div>
 
-            <Divider />
+            <br />
 
             <div>
               <h1 className="font-semibold text-gray-500">Added On</h1>
@@ -353,6 +354,7 @@ function ProductInfo() {
                 <Button
                   onClick={() => setShowAddNewBid(!showAddNewBid)}
                   disabled={buySellUser?._id === product?.seller?._id} // ✅ updated
+                  className=" text-white bg-blue-500  transition shadow-md"
                 >
                   New Bid
                 </Button>
