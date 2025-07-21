@@ -69,7 +69,7 @@ function Main({ questions }) {
     </p>
 
     {/* Responsive Scrollable Tabs */}
-    <div className="flex gap-2 overflow-x-auto scrollbar-hide bg-gray-100 dark:bg-gray-800 p-2 rounded-full shadow-inner sm:flex-wrap">
+    {/* <div className="flex gap-2 overflow-x-auto scrollbar-hide bg-gray-100 dark:bg-gray-800 p-2 rounded-full shadow-inner sm:flex-wrap">
       {["Newest", "Most Viewed", "Most Voted", "Unanswered"].map((tab) => (
         <button
           key={tab}
@@ -83,7 +83,23 @@ function Main({ questions }) {
           {tab}
         </button>
       ))}
-    </div>
+    </div> */}
+      <div className="flex gap-2 sm:flex-nowrap flex-wrap sm:overflow-x-auto overflow-x-auto scrollbar-hide bg-gray-100 dark:bg-gray-800 p-4 rounded-full shadow-inner">
+  {["Newest", "Most Viewed", "Most Voted", "Unanswered"].map((tab) => (
+    <button
+      key={tab}
+      onClick={() => setFilter(tab)}
+      className={`px-3 py-1 text-xs sm:px-4 sm:py-1.5 sm:text-sm rounded-full whitespace-nowrap transition-all duration-300 focus:outline-none ${
+        filter === tab
+          ? "bg-blue-600 text-white shadow"
+          : "text-gray-700 dark:text-gray-300 hover:bg-blue-200 dark:hover:bg-gray-700"
+      }`}
+    >
+      {tab}
+    </button>
+  ))}
+</div>
+
   </div>
 
   {/* Questions List */}

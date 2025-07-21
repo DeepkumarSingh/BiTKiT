@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
+import { Link } from 'react-router-dom'
 
 function EEE() {
     return (
@@ -16,14 +17,14 @@ function EEE() {
                             <div className="collapse-title text-xl font-medium"
                             >Semester-1</div>
                             <div className="collapse-content">
-                                <a href="/course/cse/cse_sem1"><span className='text-blue-500'>click-here</span></a>
+                                <Link to="/course/cse/cse_sem1"><span className='text-blue-500'>click-here</span></Link>
                             </div>
                         </div>
                         <div className="collapse collapse-plus bg-base-200 mt-1">
                             <input type="radio" name="my-accordion-3" />
                             <div className="collapse-title text-xl font-medium">Semester-2</div>
                             <div className="collapse-content">
-                                <a href="/course/cse/cse_sem2"><span className='text-blue-500'>click-here</span></a>
+                                <Link to="/course/cse/cse_sem2"><span className='text-blue-500'>click-here</span></Link>
                             </div>
                         </div>
                         {/* <div className="collapse collapse-plus bg-base-200 mt-1">

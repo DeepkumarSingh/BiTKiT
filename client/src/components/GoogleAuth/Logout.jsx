@@ -40,12 +40,14 @@ import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setForumUser, setBuySellUser } from "../../redux/usersSlice";
+import { toast } from "react-hot-toast";
 
 const Logout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = getAuth();
   const forumUser = useSelector((state) => state.users.forumUser);
+  
 
   const handleLogout = async () => {
     try {
@@ -56,10 +58,12 @@ const Logout = () => {
       dispatch(setForumUser(null));
       dispatch(setBuySellUser(null));
 
-      alert("👋 Logged out");
+      //alert("👋 Logged out");
+      toast.success("👋 Logged out");
       navigate("/");
     } catch (error) {
       console.error("Logout failed:", error);
+      // toast.error("Logout failed. Please try again.");
     }
   };
 
