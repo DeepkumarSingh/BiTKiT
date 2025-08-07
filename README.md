@@ -67,5 +67,26 @@ Group-Project/
 
 ├── README.md
 
+## 🌍 Open Source Contribution
 
+BiTKiT is an open-source initiative by students of BIT Mesra aimed at solving real campus problems through technology. We believe in collaboration, learning by building, and giving back to the community.
 
+We welcome all contributions—bug fixes, new features, suggestions, or documentation improvements.
+
+### 📌 How to Contribute
+
+1. **Fork** the repository  
+2. **Clone** your fork:
+   ```bash
+   git clone https://github.com/your-username/BiTKiT.git
+
+3. Create a new branch for your feature or fix:
+  ```bash
+    git checkout -b feature-name
+4. Make your changes and commit them:
+  ```bash
+    git add .
+    git commit -m "Add: brief description of your change"
+5. Push to your forked repository:
+  ```bash
+    git push origin feature-name
